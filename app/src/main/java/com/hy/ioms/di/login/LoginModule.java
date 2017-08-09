@@ -3,7 +3,7 @@ package com.hy.ioms.di.login;
 import android.content.SharedPreferences;
 
 import com.hy.ioms.di.AppScope;
-import com.hy.ioms.model.net.IomsApi;
+import com.hy.ioms.model.service.UserService;
 import com.hy.ioms.view.IView;
 import com.hy.ioms.view.login.LoginActivity;
 
@@ -31,8 +31,8 @@ public class LoginModule {
 
     @Provides
     @AppScope
-    LoginViewModel provideLoginViewModel(IomsApi iomsApi,
+    LoginViewModel provideLoginViewModel(UserService userService,
                                          SharedPreferences sharedPreferences, IView view) {
-        return new LoginViewModel(iomsApi, sharedPreferences, view);
+        return new LoginViewModel(userService, sharedPreferences, view);
     }
 }

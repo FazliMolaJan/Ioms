@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.hy.ioms.model.Page;
 import com.hy.ioms.model.PagingParams;
-import com.hy.ioms.model.service.DeviceDataService;
+import com.hy.ioms.model.interactor.DeviceDataInteractor;
 import com.hy.ioms.model.vo.DeviceVO;
 import com.hy.ioms.utils.rx.BaseSingleObserver;
 import com.hy.ioms.utils.rx.RxJavaUtils;
@@ -20,7 +20,7 @@ import io.reactivex.annotations.NonNull;
 public class DeviceViewModel {
 
     @Inject
-    DeviceDataService deviceDataService;
+    DeviceDataInteractor deviceDataInteractor;
 
     @Inject
     PagingParams pagingParams;
@@ -29,8 +29,7 @@ public class DeviceViewModel {
 
 
     public void getDevices() {
-        deviceDataService.getDevices(pagingParams.currentPage + 1, pagingParams.itemsPerPage,
-                pagingParams.sort)
+        deviceDataInteractor.getDevices(pagingParams)
                 .compose(RxJavaUtils.single_io_main())
                 .subscribe(new BaseSingleObserver<Page<DeviceVO>>(context) {
 
