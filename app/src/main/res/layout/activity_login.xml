@@ -1,0 +1,120 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.hy.ioms.view.login.LoginActivity">
+
+    <data>
+
+        <variable
+            name="user"
+            type="vm.UserViewModel"/>
+
+        <variable
+            name="viewmodel"
+            type="vm.LoginViewModel"/>
+
+        <import type="android.view.View"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/Widget.AppCompat.PopupMenu"
+            app:titleTextColor="@color/material_light_white"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/account_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/material_component_cards_left_and_right_padding"
+            android:layout_marginStart="@dimen/material_component_cards_left_and_right_padding"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/account_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_prompt_account"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:text="@={user.account}"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/material_component_cards_left_and_right_padding"
+            android:layout_marginStart="@dimen/material_component_cards_left_and_right_padding"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/account_layout">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/password_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/login_prompt_password"
+                android:imeActionId="333"
+                android:imeActionLabel="@string/login_action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:text="@={user.password}"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/sing_in"
+            style="?android:textAppearanceLargeInverse"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/material_component_cards_left_and_right_padding"
+            android:layout_marginStart="@dimen/material_component_cards_left_and_right_padding"
+            android:background="@drawable/btn_blue_bg"
+            android:onClick="@{() -> viewmodel.login(user)}"
+            android:text="@string/login_action_sign_in_short"
+            android:visibility="@{viewmodel.isLogin?View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_layout"
+            tools:visibility="visible"/>
+
+        <ProgressBar
+            android:id="@+id/loading_bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="@{viewmodel.isLogin?View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_layout"
+            tools:visibility="visible"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+
+

@@ -1,0 +1,93 @@
+plugins {
+    id "me.tatarka.retrolambda" version "3.4.0"
+}
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.hy.ioms"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+//            buildConfigField("String", "API_HOST", "\"http://172.16.16.121:8080/\"")
+//            buildConfigField("String", "API_HOST", "\"http://192.168.123.235:8080/\"")
+//            buildConfigField("String", "API_HOST", "\"http://www4.ioms.com.cn:9090/\"")
+            buildConfigField("String", "API_HOST", "\"http://www7.ioms.com.cn:9090/\"")
+//            buildConfigField("String", "API_HOST", "\"http://172.16.19.254:8080/\"")
+            buildConfigField("String", "SP_NAME", "\"monitor_sp\"")
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_HOST", "\"http://www4.ioms.com.cn:9090/\"")
+            buildConfigField("String", "SP_NAME", "\"monitor_sp\"")
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+ext {
+    support = '26.+'
+    retrofit2 = '2.3.0'
+    dagger2 = '2.7'
+    glide = '3.7.0'
+    rxAndroid = '2.0.1'
+    rxjava2 = '2.1.0'
+    rxlifecycle = '2.1.0'
+    leakcanary = '1.5'
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger2"
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanary"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary"
+    compile "com.android.support:appcompat-v7:$support"
+    compile "com.android.support:support-v4:$support"
+    compile "com.android.support:support-annotations:$support"
+    compile "com.android.support:design:$support"
+    compile "com.android.support:recyclerview-v7:$support"
+    compile "com.android.support:transition:$support"
+    compile "com.android.support:cardview-v7:$support"
+    compile "com.android.support:palette-v7:$support"
+    compile "com.android.support:support-vector-drawable:$support"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit2"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$retrofit2"
+    compile "io.reactivex.rxjava2:rxandroid:$rxAndroid"
+    compile "io.reactivex.rxjava2:rxjava:$rxjava2"
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rxlifecycle"
+    compile "com.trello.rxlifecycle2:rxlifecycle-android:$rxlifecycle"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rxlifecycle"
+    compile "com.google.dagger:dagger:$dagger2"
+    compile "com.github.bumptech.glide:glide:$glide"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'javax.annotation:javax.annotation-api:1.2'
+    compile 'com.github.chrisbanes:PhotoView:2.0.0'
+    compile 'com.dmitrymalkovich.android:material-design-dimens:1.4'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.jakewharton.timber:timber:4.5.1'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:2.8.47'
+    testCompile "org.robolectric:robolectric:3.4"
+}
