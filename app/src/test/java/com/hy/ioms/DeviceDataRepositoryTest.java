@@ -18,7 +18,7 @@ import io.reactivex.observers.TestObserver;
  * Created by wsw on 2017/8/3.
  */
 @RunWith(RobolectricTestRunner.class)
-public class deviceDataRepositoryTest extends BaseTest {
+public class DeviceDataRepositoryTest extends BaseTest {
 
     DeviceDataRepository deviceDataRepository;
 
