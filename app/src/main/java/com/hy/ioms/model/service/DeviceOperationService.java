@@ -2,7 +2,7 @@ package com.hy.ioms.model.service;
 
 import com.hy.ioms.model.dto.OperateDTO;
 import com.hy.ioms.model.dto.ResponseDTO;
-import com.hy.ioms.model.interactor.DeviceOperationInteractor;
+import com.hy.ioms.model.interaction.DeviceOperationInteraction;
 import com.hy.ioms.model.repository.DeviceOperationRepository;
 import com.hy.ioms.model.vo.ResponseVO;
 
@@ -14,13 +14,17 @@ import javax.inject.Inject;
 import io.reactivex.Single;
 
 /**
+ * 设备操作Service
  * Created by wsw on 2017/8/9.
  */
-
-public class DeviceOperationService implements DeviceOperationInteractor {
-
+@SuppressWarnings("unused")
+public class DeviceOperationService implements DeviceOperationInteraction {
     @Inject
-    DeviceOperationRepository deviceOperationRepository;
+    public DeviceOperationService(DeviceOperationRepository deviceOperationRepository) {
+        this.deviceOperationRepository = deviceOperationRepository;
+    }
+
+    private DeviceOperationRepository deviceOperationRepository;
 
     /**
      * 视屏播放
@@ -58,7 +62,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param presetId   预制位id
      * @param width      图片宽度
      * @param height     图片高
-     * @return
      */
     @Override
     public Single<ResponseVO> capturePicture(String deviceCode, String camera, int presetId, int width, int height) {
@@ -79,7 +82,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      *
      * @param deviceCode 设备code
      * @param camera     目标相机
-     * @return
      */
     @Override
     public Single<ResponseVO> OpenCameraPower(String deviceCode, String camera, int time) {
@@ -97,7 +99,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      *
      * @param deviceCode 设备code
      * @param time       打开时间
-     * @return
      */
     @Override
     public Single<ResponseVO> openWifiPower(String deviceCode, int time) {
@@ -118,7 +119,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param camera     目标相机
      * @param presetId   预置位id
      * @param speed      速度
-     * @return
      */
     @Override
     public Single<ResponseVO> setPreset(String type, String deviceCode, String camera, String command, int presetId, float speed, float horizontal, float vertical) {
@@ -140,7 +140,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param camera     目标相机
      * @param presetId   预置位id
      * @param speed      速度
-     * @return
      */
     @Override
     public Single<ResponseVO> gotoPreset(String type, String deviceCode, String camera, String command, int presetId, float speed, float horizontal, float vertical) {
@@ -162,7 +161,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param command    指令
      * @param presetId   预置位id
      * @param speed      速度
-     * @return
      */
     private Single<ResponseVO> cameraPresetManager(String deviceCode, String camera, String command, int presetId, float speed) {
         OperateDTO operateDTO = new OperateDTO();
@@ -185,7 +183,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param horizontal 待设置预置位的水平方位
      * @param vertical   待设置预置位的垂直方位
      * @param speed      Ptz速度
-     * @return
      */
     private Single<ResponseVO> tiltPresetManager(String deviceCode, String command, int presetId, float horizontal, float vertical, float
             speed) {
@@ -216,7 +213,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param camera     目标相机
      * @param command    指令
      * @param speed      速度
-     * @return
      */
     @Override
     public Single<ResponseVO> operateControl(String type, String deviceCode, String camera, String command, String speed) {
@@ -236,7 +232,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param camera     目标相机
      * @param command    指令
      * @param speed      速度
-     * @return
      */
     private Single<ResponseVO> cameraOperateManager(String deviceCode, String camera, String command, String speed) {
         OperateDTO operateDTO = new OperateDTO();
@@ -255,7 +250,6 @@ public class DeviceOperationService implements DeviceOperationInteractor {
      * @param deviceCode 设备code
      * @param command    指令
      * @param speed      速度
-     * @return
      */
     private Single<ResponseVO> tiltOperateManager(String deviceCode, String command, String speed) {
         OperateDTO operateDTO = new OperateDTO();

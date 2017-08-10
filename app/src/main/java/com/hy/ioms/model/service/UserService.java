@@ -1,6 +1,6 @@
 package com.hy.ioms.model.service;
 
-import com.hy.ioms.model.interactor.UserInteractor;
+import com.hy.ioms.model.interaction.UserInteraction;
 import com.hy.ioms.model.repository.UserRepository;
 
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import io.reactivex.Completable;
  * Created by wsw on 2017/8/9.
  */
 
-public class UserService implements UserInteractor {
+public class UserService implements UserInteraction {
 
     private UserRepository userRepository;
 
