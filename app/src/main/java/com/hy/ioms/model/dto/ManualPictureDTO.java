@@ -5,12 +5,11 @@ import com.hy.ioms.model.vo.PictureVO;
 import com.hy.ioms.utils.DateUtils;
 
 /**
- * ${description}
+ * 手动拍照图片DTO
  * Created by wsw on 2017/4/10.
  */
-
+@SuppressWarnings("unused")
 public class ManualPictureDTO implements Mapper<PictureVO>{
-
 
     /**
      * id : 2

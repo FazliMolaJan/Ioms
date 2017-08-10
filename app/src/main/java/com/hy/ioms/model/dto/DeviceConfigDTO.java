@@ -1,9 +1,10 @@
 package com.hy.ioms.model.dto;
 
 /**
- * ${description}
+ * 设备config DTO
  * Created by wsw on 2017/5/9.
  */
+@SuppressWarnings("unused")
 
 public class DeviceConfigDTO {
 

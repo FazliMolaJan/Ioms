@@ -1,7 +1,7 @@
 package com.hy.ioms.model.dto;
 
 /**
- * ${description}
+ * 视屏播放任务DTO
  * Created by wsw on 2017/6/1.
  */
 @SuppressWarnings("unused")

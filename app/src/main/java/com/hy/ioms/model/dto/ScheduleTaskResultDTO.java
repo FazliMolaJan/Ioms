@@ -1,9 +1,10 @@
 package com.hy.ioms.model.dto;
 
 /**
+ * 计划任务结果DTO
  * Created by wsw on 2017/4/18.
  */
-
+@SuppressWarnings("unused")
 public class ScheduleTaskResultDTO {
     private String content;
     private Long deviceId;

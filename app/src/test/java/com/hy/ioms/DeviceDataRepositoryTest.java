@@ -30,8 +30,9 @@ public class DeviceDataRepositoryTest extends BaseTest {
 
     @Test
     public void getDevices() throws Exception {
-        TestObserver testObserver = new TestObserver<>();
-        login().andThen(deviceDataRepository.getDevices(0, 10, ""))
+        iomsApi.getAuthenticate()
+                .andThen(iomsApi.login("admin", "admin", true))
+                .andThen(deviceDataRepository.getDevices(0, 10, ""))
                 .subscribe(new SingleObserver<Page<DeviceDTO>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
@@ -41,6 +42,7 @@ public class DeviceDataRepositoryTest extends BaseTest {
                     @Override
                     public void onSuccess(@NonNull Page<DeviceDTO> deviceDTOPage) {
                         System.out.println(deviceDTOPage.getTotalNumber());
+                        System.out.println(deviceDTOPage.getCurrentPage());
                     }
 
                     @Override

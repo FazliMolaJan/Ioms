@@ -1,7 +1,7 @@
 package com.hy.ioms.model.dto;
 
 /**
- * ${description}
+ * 视频播放DTO
  * Created by wsw on 2017/6/1.
  */
 @SuppressWarnings("unused")

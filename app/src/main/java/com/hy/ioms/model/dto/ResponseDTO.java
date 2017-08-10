@@ -1,11 +1,14 @@
 package com.hy.ioms.model.dto;
 
+import com.hy.ioms.model.Mapper;
+import com.hy.ioms.model.vo.ResponseVO;
+
 /**
- * ${description}
+ * 设备端返回结果DTO
  * Created by wsw on 2017/5/10.
  */
-
-public class ResponseDTO {
+@SuppressWarnings("unused")
+public class ResponseDTO implements Mapper<ResponseVO> {
 
     /**
      * result : {"NoticeMsg":"Command is running","Result":"Pending"}
@@ -231,5 +234,17 @@ public class ResponseDTO {
                 ", header=" + header +
                 ", destInfo=" + destInfo +
                 '}';
+    }
+
+
+    @Override
+    public ResponseVO transform() {
+        ResponseVO responseVO = new ResponseVO();
+        responseVO.setCommand(this.destInfo.Method);
+        responseVO.setResult(this.result.getResult());
+        if (this.result.getResult().equalsIgnoreCase("failed")) {
+            responseVO.setMessage(this.result.getErrorMsg());
+        }
+        return responseVO;
     }
 }

@@ -3,7 +3,7 @@ package com.hy.ioms.model.service;
 import com.hy.ioms.model.Page;
 import com.hy.ioms.model.PagingParams;
 import com.hy.ioms.model.dto.DeviceDTO;
-import com.hy.ioms.model.interactor.DeviceDataInteractor;
+import com.hy.ioms.model.interaction.DeviceDataInteraction;
 import com.hy.ioms.model.repository.DeviceDataRepository;
 import com.hy.ioms.model.vo.DeviceVO;
 
@@ -15,13 +15,19 @@ import javax.inject.Inject;
 import io.reactivex.Single;
 
 /**
+ * 设备数据服务
  * Created by wsw on 2017/8/2.
  */
+@SuppressWarnings("unuesd")
+public class DeviceDataService implements DeviceDataInteraction {
 
-public class DeviceDataService implements DeviceDataInteractor {
 
     @Inject
-    DeviceDataRepository deviceDataRepository;
+    public DeviceDataService(DeviceDataRepository deviceDataRepository) {
+        this.deviceDataRepository = deviceDataRepository;
+    }
+
+    private DeviceDataRepository deviceDataRepository;
 
     @Override
     public Single<Page<DeviceVO>> getDevices(PagingParams pagingParams) {

@@ -4,7 +4,7 @@ import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
 
-import com.hy.ioms.model.interactor.UserInteractor;
+import com.hy.ioms.model.interaction.UserInteraction;
 import com.hy.ioms.view.IView;
 
 /**
@@ -13,15 +13,15 @@ import com.hy.ioms.view.IView;
  */
 public class LoginViewModel extends BaseObservable {
 
-    private UserInteractor userInteractor;
+    private UserInteraction userInteraction;
     private SharedPreferences sharedPreferences;
     private IView view;
 
     public ObservableBoolean isLogin = new ObservableBoolean(false);
 
-    public LoginViewModel(UserInteractor userInteractor,
+    public LoginViewModel(UserInteraction userInteraction,
                           SharedPreferences sharedPreferences, IView view) {
-        this.userInteractor = userInteractor;
+        this.userInteraction = userInteraction;
         this.sharedPreferences = sharedPreferences;
         this.view = view;
     }
