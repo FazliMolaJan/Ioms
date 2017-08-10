@@ -12,5 +12,7 @@ import io.reactivex.Single;
  */
 
 public interface DeviceDataInteractor {
+    //获取设备的状态，baseInfo，图片（手动拍照图片，计划任务图片）
     Single<Page<DeviceVO>> getDevices(PagingParams pagingParams);
+
 }
