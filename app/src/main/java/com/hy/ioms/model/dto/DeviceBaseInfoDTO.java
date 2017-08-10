@@ -3,9 +3,10 @@ package com.hy.ioms.model.dto;
 import java.util.List;
 
 /**
- * ${description}
+ * 设备baseInfo DTO
  * Created by wsw on 2017/5/9.
  */
+@SuppressWarnings("unused")
 
 public class DeviceBaseInfoDTO {
 

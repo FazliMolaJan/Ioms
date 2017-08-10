@@ -1,9 +1,10 @@
 package com.hy.ioms.model.dto;
 
 /**
+ * 线路DTO
  * Created by wsw on 2017/4/14.
  */
-
+@SuppressWarnings("unused")
 public class CircuitDTO {
 
     private Long id;

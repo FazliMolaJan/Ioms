@@ -4,10 +4,10 @@ import com.hy.ioms.model.Mapper;
 import com.hy.ioms.model.vo.ResponseVO;
 
 /**
- * ${description}
+ * 设备端返回结果DTO
  * Created by wsw on 2017/5/10.
  */
-
+@SuppressWarnings("unused")
 public class ResponseDTO implements Mapper<ResponseVO> {
 
     /**

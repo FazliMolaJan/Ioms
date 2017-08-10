@@ -4,8 +4,10 @@ import com.hy.ioms.model.Mapper;
 import com.hy.ioms.model.vo.DeviceVO;
 
 /**
+ * 设备DTO
  * Created by wsw on 2017/4/13.
  */
+@SuppressWarnings("unused")
 
 public class DeviceDTO implements Mapper<DeviceVO> {
     private Long id;

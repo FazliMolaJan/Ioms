@@ -1,11 +1,11 @@
 package com.hy.ioms.model.dto;
 
 /**
+ * 杆塔DTO
  * Created by wsw on 2017/4/14.
  */
-
+@SuppressWarnings("unused")
 public class PoleDTO {
-
     private Long id;
     private String code;
     private String name;

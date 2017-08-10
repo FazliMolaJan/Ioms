@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 操作DTO,用于转换为json发送到后台
  * Created by wsw on 2017/8/9.
  */
-
+@SuppressWarnings("unused")
 public class OperateDTO {
 
     public OperateDTO() {

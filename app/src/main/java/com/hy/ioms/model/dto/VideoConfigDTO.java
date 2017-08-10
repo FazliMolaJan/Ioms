@@ -3,10 +3,10 @@ package com.hy.ioms.model.dto;
 import java.util.List;
 
 /**
- * ${description}
+ * 视频配置DTO
  * Created by wsw on 2017/6/1.
  */
-
+@SuppressWarnings("unused")
 public class VideoConfigDTO {
 
     /**

@@ -1,8 +1,10 @@
 package com.hy.ioms.model.dto;
 
 /**
+ * 公司DTO
  * Created by wsw on 2017/4/14.
  */
+@SuppressWarnings("unused")
 
 public class CompanyDTO {
     private Long id;
