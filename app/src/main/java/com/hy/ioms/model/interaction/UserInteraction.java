@@ -1,4 +1,4 @@
-package com.hy.ioms.model.interactor;
+package com.hy.ioms.model.interaction;
 
 import io.reactivex.Completable;
 
@@ -7,6 +7,6 @@ import io.reactivex.Completable;
  * Created by wsw on 2017/8/9.
  */
 
-public interface UserInteractor {
+public interface UserInteraction {
     Completable login(String account, String password);
 }
