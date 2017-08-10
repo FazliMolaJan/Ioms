@@ -70,5 +70,8 @@ public class Config {
 
     public static String DEFAULT_PTZ_TYPE = "ptz";
 
+    public static String STREAM_SERVER_HOST = "117.48.202.207";
+    public static String STREAM_SERVER_PORT = "554";
+
 
 }
