@@ -7,7 +7,7 @@ import com.hy.ioms.model.vo.DeviceVO;
 import com.hy.ioms.model.vo.PictureVO;
 import com.hy.ioms.model.vo.VideoStatusVO;
 
-import java.util.List;
+import java.util.Set;
 
 import io.reactivex.Single;
 
@@ -29,23 +29,23 @@ public interface DeviceDataInteraction {
     /**
      * 获取计划任务图片
      *
-     * @param deviceCode   设备code
+     * @param deviceId     设备id
      * @param pagingParams 分页信息
      */
-    Single<Page<PictureVO>> getScheduledTaskPictures(String deviceCode, PagingParams pagingParams);
+    Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, PagingParams pagingParams);
 
     /**
      * 获取设备手动拍照图片
      *
-     * @param deviceCode   设备code
+     * @param deviceId     设备id
      * @param pagingParams 分页信息
      */
-    Single<Page<PictureVO>> getManualPictures(String deviceCode, PagingParams pagingParams);
+    Single<Page<PictureVO>> getManualPictures(Long deviceId, PagingParams pagingParams);
 
     /**
      * 获取在线设备code列表
      */
-    Single<List<String>> getOnlineDeviceCodeList();
+    Single<Set<String>> getOnlineDeviceSet();
 
 
     /**
@@ -53,12 +53,12 @@ public interface DeviceDataInteraction {
      *
      * @param deviceCode 设备code
      */
-    Single<DeviceStatusVO> getDeviceStatus(String deviceCode);
+    Single<DeviceStatusVO> getCurrentDeviceStatus(String deviceCode);
 
     /**
      * 获取设备视频的当前状态
      *
      * @param deviceCode 设备code
      */
-    Single<VideoStatusVO> getVideoStatus(String deviceCode);
+    Single<VideoStatusVO> getVideoSenderTask(String deviceCode);
 }
