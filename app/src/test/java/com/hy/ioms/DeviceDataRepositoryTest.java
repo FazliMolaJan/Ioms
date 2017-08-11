@@ -17,7 +17,6 @@ import io.reactivex.observers.TestObserver;
 /**
  * Created by wsw on 2017/8/3.
  */
-@RunWith(RobolectricTestRunner.class)
 public class DeviceDataRepositoryTest extends BaseTest {
 
     DeviceDataRepository deviceDataRepository;
@@ -30,9 +29,7 @@ public class DeviceDataRepositoryTest extends BaseTest {
 
     @Test
     public void getDevices() throws Exception {
-        iomsApi.getAuthenticate()
-                .andThen(iomsApi.login("admin", "admin", true))
-                .andThen(deviceDataRepository.getDevices(0, 10, ""))
+        login().andThen(deviceDataRepository.getDevices(0, 10, ""))
                 .subscribe(new SingleObserver<Page<DeviceDTO>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {

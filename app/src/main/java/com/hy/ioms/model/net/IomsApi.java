@@ -3,7 +3,6 @@ package com.hy.ioms.model.net;
 
 import com.hy.ioms.model.dto.DeviceConfigDTO;
 import com.hy.ioms.model.dto.DeviceDTO;
-import com.hy.ioms.model.dto.KeepVideoDTO;
 import com.hy.ioms.model.dto.ManualPictureDTO;
 import com.hy.ioms.model.dto.ResponseDTO;
 import com.hy.ioms.model.dto.ScheduleTaskResultDTO;
@@ -252,7 +251,7 @@ public interface IomsApi {
      * @param taskId     任务id
      */
     @GET("api/video/keep")
-    Single<KeepVideoDTO> keepVideo(@Query("deviceCode") String deviceCode,
+    Single<ResponseDTO> keepVideo(@Query("deviceCode") String deviceCode,
                                    @Query("taskId") String taskId);
 
 
