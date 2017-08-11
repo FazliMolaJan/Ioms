@@ -8,6 +8,7 @@ import com.hy.ioms.App;
 import com.hy.ioms.di.net.ApiServiceModule;
 import com.hy.ioms.model.net.IomsApi;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -24,6 +25,10 @@ public interface AppComponent {
 
     Gson gson();
 
-    SharedPreferences sharedPreferences();
+    SharedPreferences netSharedPreferences();
+
+    SharedPreferences normalSharedPreferences();
+
+
 
 }

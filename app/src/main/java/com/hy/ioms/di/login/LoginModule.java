@@ -7,6 +7,8 @@ import com.hy.ioms.model.service.UserService;
 import com.hy.ioms.view.IView;
 import com.hy.ioms.view.login.LoginActivity;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 import vm.LoginViewModel;
@@ -32,7 +34,7 @@ public class LoginModule {
     @Provides
     @AppScope
     LoginViewModel provideLoginViewModel(UserService userService,
-                                         SharedPreferences sharedPreferences, IView view) {
-        return new LoginViewModel(userService, sharedPreferences, view);
+                                         @Named("net") SharedPreferences netSharedPreferences, IView view) {
+        return new LoginViewModel(userService, netSharedPreferences, view);
     }
 }

@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.hy.ioms.BuildConfig;
 import com.hy.ioms.utils.rx.RxApiManager;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -33,9 +34,18 @@ public class AppModule {
         return new Gson();
     }
 
+
+    @Named("net")
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences() {
+    SharedPreferences provideNetSharedPreferences() {
+        return mContext.getSharedPreferences(BuildConfig.NET_SP_NAME, Context.MODE_PRIVATE);
+    }
+
+    @Named("normal")
+    @Provides
+    @Singleton
+    SharedPreferences provideNormalSharedPreferences() {
         return mContext.getSharedPreferences(BuildConfig.SP_NAME, Context.MODE_PRIVATE);
     }
 

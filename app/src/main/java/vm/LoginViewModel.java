@@ -7,6 +7,8 @@ import android.databinding.ObservableBoolean;
 import com.hy.ioms.model.interaction.UserInteraction;
 import com.hy.ioms.view.IView;
 
+import javax.inject.Named;
+
 /**
  * 登陆 ViewModel
  * Created by wsw on 2017/6/12.

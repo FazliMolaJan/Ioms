@@ -9,6 +9,7 @@ import com.hy.ioms.BuildConfig;
 import java.io.Serializable;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import static com.hy.ioms.Config.SP_ACCOUNT;
 import static com.hy.ioms.Config.SP_PASSWORD;
@@ -23,8 +24,8 @@ public class UserViewModel extends BaseObservable implements Serializable {
     private SharedPreferences sharedPreferences;
 
     @Inject
-    public UserViewModel(SharedPreferences sharedPreferences) {
-        this.sharedPreferences = sharedPreferences;
+    public UserViewModel(@Named("normal") SharedPreferences normalSharedPreferences) {
+        this.sharedPreferences = normalSharedPreferences;
     }
 
     public ObservableField<String> account = new ObservableField<>();

@@ -5,7 +5,10 @@ import com.hy.ioms.model.PagingParams;
 import com.hy.ioms.model.dto.DeviceDTO;
 import com.hy.ioms.model.interaction.DeviceDataInteraction;
 import com.hy.ioms.model.repository.DeviceDataRepository;
+import com.hy.ioms.model.vo.DeviceStatusVO;
 import com.hy.ioms.model.vo.DeviceVO;
+import com.hy.ioms.model.vo.PictureVO;
+import com.hy.ioms.model.vo.VideoStatusVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,5 +49,30 @@ public class DeviceDataService implements DeviceDataInteraction {
                     deviceVoPage.setContent(deviceVOs);
                     return deviceVoPage;
                 });
+    }
+
+    @Override
+    public Single<Page<PictureVO>> getScheduledTaskPictures(String deviceCode, PagingParams pagingParams) {
+        return null;
+    }
+
+    @Override
+    public Single<Page<PictureVO>> getManualPictures(String deviceCode, PagingParams pagingParams) {
+        return null;
+    }
+
+    @Override
+    public Single<List<String>> getOnlineDeviceCodeList() {
+        return null;
+    }
+
+    @Override
+    public Single<DeviceStatusVO> getDeviceStatus(String deviceCode) {
+        return null;
+    }
+
+    @Override
+    public Single<VideoStatusVO> getVideoStatus(String deviceCode) {
+        return null;
     }
 }

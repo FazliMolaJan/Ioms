@@ -8,6 +8,7 @@ import com.hy.ioms.Config;
 import java.io.IOException;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -19,12 +20,13 @@ import okhttp3.Response;
 
 public class ReadCookiesInterceptor implements Interceptor {
     private static final String TAG = "ReadCookiesInterceptor";
-    @Inject
-    SharedPreferences sharedPreferences;
 
     @Inject
-    public ReadCookiesInterceptor() {
+    public ReadCookiesInterceptor(@Named("net") SharedPreferences netSharedPreferences) {
+        this.sharedPreferences = netSharedPreferences;
     }
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     public Response intercept(Chain chain) throws IOException {
