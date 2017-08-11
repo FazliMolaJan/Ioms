@@ -1,11 +1,14 @@
 package com.hy.ioms.model.dto;
 
+import com.hy.ioms.model.Mapper;
+import com.hy.ioms.model.vo.VideoStatusVO;
+
 /**
  * 视屏播放任务DTO
  * Created by wsw on 2017/6/1.
  */
 @SuppressWarnings("unused")
-public class VideoSenderTaskDTO {
+public class VideoSenderTaskDTO implements Mapper<VideoStatusVO> {
 
     /**
      * id : 7
@@ -102,5 +105,20 @@ public class VideoSenderTaskDTO {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public VideoStatusVO transform() {
+        VideoStatusVO videoStatusVO = new VideoStatusVO();
+        videoStatusVO.setId(this.id);
+        videoStatusVO.setChannel(this.channel);
+        videoStatusVO.setUrl(this.url);
+        videoStatusVO.setStat(this.stat);
+        videoStatusVO.setNic(this.nic);
+        videoStatusVO.setCamera(this.camera);
+        videoStatusVO.setServerPort(this.serverPort);
+        videoStatusVO.setServerAddr(this.serverAddr);
+        videoStatusVO.setMsg(this.msg);
+        return videoStatusVO;
     }
 }

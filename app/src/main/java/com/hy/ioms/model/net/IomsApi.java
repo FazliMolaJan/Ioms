@@ -3,6 +3,7 @@ package com.hy.ioms.model.net;
 
 import com.hy.ioms.model.dto.DeviceConfigDTO;
 import com.hy.ioms.model.dto.DeviceDTO;
+import com.hy.ioms.model.dto.DeviceStatusDTO;
 import com.hy.ioms.model.dto.ManualPictureDTO;
 import com.hy.ioms.model.dto.ResponseDTO;
 import com.hy.ioms.model.dto.ScheduleTaskResultDTO;
@@ -261,7 +262,7 @@ public interface IomsApi {
      * @param deviceCode 设备id
      */
     @GET("api/information/deviceState/{deviceCode}")
-    Single<String> getCurrentDeviceStatus(@Path("deviceCode") String deviceCode);
+    Single<DeviceStatusDTO> getCurrentDeviceStatus(@Path("deviceCode") String deviceCode);
 
     /**
      * 设备的操作,包括设备开电,播放,转动等以及设备获取配置等

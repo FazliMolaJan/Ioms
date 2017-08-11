@@ -12,6 +12,7 @@ import com.hy.ioms.model.vo.VideoStatusVO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -30,8 +31,14 @@ public class DeviceDataService implements DeviceDataInteraction {
         this.deviceDataRepository = deviceDataRepository;
     }
 
+
     private DeviceDataRepository deviceDataRepository;
 
+    /**
+     * 获取设备
+     *
+     * @param pagingParams 分页信息
+     */
     @Override
     public Single<Page<DeviceVO>> getDevices(PagingParams pagingParams) {
         Page<DeviceVO> deviceVoPage = new Page<>();
@@ -51,28 +58,87 @@ public class DeviceDataService implements DeviceDataInteraction {
                 });
     }
 
+
+    /**
+     * 获取计划任务图片
+     *
+     * @param deviceId     设备id
+     * @param pagingParams 分页信息
+     */
     @Override
-    public Single<Page<PictureVO>> getScheduledTaskPictures(String deviceCode, PagingParams pagingParams) {
-        return null;
+    public Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, PagingParams pagingParams) {
+        Page<PictureVO> scheduledTaskPictures = new Page<>();
+        return deviceDataRepository
+                .getScheduledTaskPictures(deviceId, pagingParams.queryPage, pagingParams.itemsPerPage, pagingParams.sort)
+                .doAfterSuccess(scheduledTaskPictures::synchronize)
+                .map(Page::getContent)
+                .map(scheduleTaskPictureDTOs -> {
+                    List<PictureVO> list = new ArrayList<>();
+                    for (ScheduleTaskPictureDTO scheduleTaskPictureDTO : scheduleTaskPictureDTOs) {
+                        list.add(scheduleTaskPictureDTO.transform());
+                    }
+                    return list;
+                }).map(pictureVOs -> {
+                    scheduledTaskPictures.setContent(pictureVOs);
+                    return scheduledTaskPictures;
+                });
+
     }
 
+    /**
+     * 获取手动拍照图片
+     *
+     * @param deviceId     设备id
+     * @param pagingParams 分页信息
+     */
     @Override
-    public Single<Page<PictureVO>> getManualPictures(String deviceCode, PagingParams pagingParams) {
-        return null;
+    public Single<Page<PictureVO>> getManualPictures(Long deviceId, PagingParams pagingParams) {
+        Page<PictureVO> manualPicturesVOPage = new Page<>();
+        return deviceDataRepository
+                .getManualPictures(deviceId, pagingParams.queryPage, pagingParams.itemsPerPage, pagingParams.sort)
+                .doAfterSuccess(manualPicturesVOPage::synchronize)
+                .map(Page::getContent)
+                .map(manualPictureDTOs -> {
+                    List<PictureVO> list = new ArrayList<>();
+                    for (ManualPictureDTO manualPictureDTO : manualPictureDTOs) {
+                        list.add(manualPictureDTO.transform());
+                    }
+                    return list;
+                }).map(pictureVOs -> {
+                    manualPicturesVOPage.setContent(pictureVOs);
+                    return manualPicturesVOPage;
+                });
     }
 
+    /**
+     * 获取在线设备
+     *
+     */
     @Override
-    public Single<List<String>> getOnlineDeviceCodeList() {
-        return null;
+    public Single<Set<String>> getOnlineDeviceSet() {
+        return deviceDataRepository.getOnlineDeviceSet();
     }
 
+    /**
+     * 获取当前设备状态
+     *
+     * @param deviceCode 设备code
+     */
     @Override
-    public Single<DeviceStatusVO> getDeviceStatus(String deviceCode) {
-        return null;
+    public Single<DeviceStatusVO> getCurrentDeviceStatus(String deviceCode) {
+        return deviceDataRepository.getCurrentDeviceStatus(deviceCode)
+                .map(DeviceStatusDTO::transform);
     }
 
+    /**
+     * 获取视频设备状态
+     *
+     * @param deviceCode 设备code
+     */
     @Override
-    public Single<VideoStatusVO> getVideoStatus(String deviceCode) {
-        return null;
+    public Single<VideoStatusVO> getVideoSenderTask(String deviceCode) {
+        return deviceDataRepository.getVideoSenderTask(deviceCode)
+                .map(VideoSenderTaskDTO::transform);
     }
+
 }

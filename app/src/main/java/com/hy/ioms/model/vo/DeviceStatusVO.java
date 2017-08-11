@@ -6,4 +6,5 @@ package com.hy.ioms.model.vo;
  */
 
 public class DeviceStatusVO {
+
 }
