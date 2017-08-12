@@ -25,9 +25,9 @@ public interface AppComponent {
 
     Gson gson();
 
-    SharedPreferences netSharedPreferences();
+    @Named("net") SharedPreferences netSharedPreferences();
 
-    SharedPreferences normalSharedPreferences();
+    @Named("normal") SharedPreferences normalSharedPreferences();
 
 
 

@@ -34,7 +34,9 @@ public class LoginModule {
     @Provides
     @AppScope
     LoginViewModel provideLoginViewModel(UserService userService,
-                                         @Named("net") SharedPreferences netSharedPreferences, IView view) {
-        return new LoginViewModel(userService, netSharedPreferences, view);
+                                         @Named("net") SharedPreferences netSharedPreferences,
+                                         @Named("normal") SharedPreferences normalSharedPreferences,
+                                         IView view) {
+        return new LoginViewModel(userService, netSharedPreferences, normalSharedPreferences,view);
     }
 }

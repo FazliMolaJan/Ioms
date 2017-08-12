@@ -8,6 +8,7 @@ import com.hy.ioms.model.PagingParams;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.CompletableTransformer;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
 import io.reactivex.ObservableTransformer;
@@ -64,6 +65,14 @@ public class RxJavaUtils {
      * rxJava线程切换 single io -> main
      */
     public static <T> SingleTransformer<T, T> single_io_main() {
+        return upstream ->
+                upstream.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+    }
+    /**
+     * rxJava线程切换 single io -> main
+     */
+    public static CompletableTransformer completable_io_main() {
         return upstream ->
                 upstream.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import static com.hy.ioms.Config.DEFAULT_ITEMS_PER_PAGE;
 import static com.hy.ioms.Config.DEFAULT_PAGE;
+import static com.hy.ioms.Config.DEFAULT_QUERY_PAGE;
 import static com.hy.ioms.Config.DEFAULT_TOTAL_COUNT;
 
 /**
@@ -16,10 +17,7 @@ public class PagingParams implements Serializable {
 
     @Inject
     public PagingParams() {
-        currentPage = DEFAULT_PAGE;
-        itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
-        totalCount = DEFAULT_TOTAL_COUNT;
-        sort = "id,desc";
+        init();
     }
 
     public int currentPage;
@@ -27,4 +25,12 @@ public class PagingParams implements Serializable {
     public int totalCount;
     public String sort;
     public int queryPage;
+
+    public void init() {
+        currentPage = DEFAULT_PAGE;
+        queryPage = DEFAULT_QUERY_PAGE;
+        itemsPerPage = DEFAULT_ITEMS_PER_PAGE;
+        totalCount = DEFAULT_TOTAL_COUNT;
+        sort = "id,desc";
+    }
 }

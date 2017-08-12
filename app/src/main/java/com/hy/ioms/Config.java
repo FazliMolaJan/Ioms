@@ -31,7 +31,8 @@ public class Config {
     //android SharedPreferences end
 
     //    page start
-    public static final int DEFAULT_PAGE = -1;
+    public static final int DEFAULT_PAGE = 1;
+    public static final int DEFAULT_QUERY_PAGE = 0;
     public static final String DEFAULT_SORT = "";
     public static final int DEFAULT_ITEMS_PER_PAGE = 10;
     public static final int DEFAULT_TOTAL_COUNT = Integer.MAX_VALUE;

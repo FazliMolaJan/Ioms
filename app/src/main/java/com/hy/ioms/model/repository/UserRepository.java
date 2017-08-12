@@ -9,6 +9,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
+ * 用户数据仓库
  * Created by wsw on 2017/8/9.
  */
 

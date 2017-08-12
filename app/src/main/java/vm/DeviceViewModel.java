@@ -1,49 +1,22 @@
 package vm;
 
-import android.content.Context;
+import android.databinding.BaseObservable;
+import android.databinding.ObservableField;
 
-import com.hy.ioms.model.Page;
-import com.hy.ioms.model.PagingParams;
-import com.hy.ioms.model.interaction.DeviceDataInteraction;
 import com.hy.ioms.model.vo.DeviceVO;
-import com.hy.ioms.utils.rx.BaseSingleObserver;
-import com.hy.ioms.utils.rx.RxJavaUtils;
+import com.hy.ioms.utils.rx.BaseObserver;
 
-import javax.inject.Inject;
-
-import io.reactivex.annotations.NonNull;
+import io.reactivex.Observable;
 
 /**
- * Created by wsw on 2017/8/2.
+ * ${description}
+ * Created by wsw on 2017/8/12.
  */
 
-public class DeviceViewModel {
+public class DeviceViewModel extends BaseObservable {
+    ObservableField<DeviceVO> voObservableField = new ObservableField<>();
 
-    @Inject
-    DeviceDataInteraction deviceDataInteraction;
-
-    @Inject
-    PagingParams pagingParams;
-
-    Context context;
-
-
-    public void getDevices() {
-        deviceDataInteraction.getDevices(pagingParams)
-                .compose(RxJavaUtils.single_io_main())
-                .subscribe(new BaseSingleObserver<Page<DeviceVO>>(context) {
-
-                    @Override
-                    public void onSuccess(@NonNull Page<DeviceVO> deviceVOPage) {
-
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-
-                    }
-                });
+    public DeviceViewModel(DeviceVO deviceVO) {
+        voObservableField.set(deviceVO);
     }
-
-
 }

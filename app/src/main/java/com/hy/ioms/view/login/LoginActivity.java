@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         userViewModel.getUser();
         //设置Layout内的data
         b.setUser(userViewModel);
-        b.setViewmodel(loginViewModel);
+        b.setVm(loginViewModel);
     }
 
     @Override
@@ -56,11 +56,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     @Override
     protected void doTransaction() {
 
-    }
-
-    public static void gotoActivity(Context context) {
-//        Intent intent = new Intent(context, DeviceListActivity.class);
-//        context.startActivity(intent);
     }
 }
 
