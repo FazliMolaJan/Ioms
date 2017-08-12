@@ -10,7 +10,7 @@
             type="vm.UserViewModel"/>
 
         <variable
-            name="viewmodel"
+            name="vm"
             type="vm.LoginViewModel"/>
 
         <import type="android.view.View"/>
@@ -90,9 +90,9 @@
             android:layout_marginEnd="@dimen/material_component_cards_left_and_right_padding"
             android:layout_marginStart="@dimen/material_component_cards_left_and_right_padding"
             android:background="@drawable/btn_blue_bg"
-            android:onClick="@{() -> viewmodel.login(user)}"
+            android:onClick="@{() -> vm.login(user)}"
             android:text="@string/login_action_sign_in_short"
-            android:visibility="@{viewmodel.isLogin?View.GONE : View.VISIBLE}"
+            android:visibility="@{vm.isLogin?View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_layout"
@@ -108,7 +108,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:visibility="@{viewmodel.isLogin?View.VISIBLE : View.GONE}"
+            android:visibility="@{vm.isLogin?View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/password_layout"
