@@ -7,8 +7,13 @@ import com.hy.ioms.view.IView;
  */
 
 public interface IBaseDataViewModel {
-
+    /**
+     * 加载更多数据
+     */
     void loadMore();
 
+    /**
+     * 刷新数据
+     */
     void refresh();
 }

@@ -10,6 +10,7 @@ import static com.hy.ioms.Config.DEFAULT_QUERY_PAGE;
 import static com.hy.ioms.Config.DEFAULT_TOTAL_COUNT;
 
 /**
+ * 分页对象
  * Created by wsw on 2017/4/14.
  */
 
@@ -21,10 +22,10 @@ public class PagingParams implements Serializable {
     }
 
     public int currentPage;
+    public int queryPage;
     public int itemsPerPage;
     public int totalCount;
     public String sort;
-    public int queryPage;
 
     public void init() {
         currentPage = DEFAULT_PAGE;

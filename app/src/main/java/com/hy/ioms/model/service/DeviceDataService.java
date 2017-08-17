@@ -1,11 +1,13 @@
 package com.hy.ioms.model.service;
 
+import com.hy.ioms.Config;
 import com.hy.ioms.model.Page;
-import com.hy.ioms.model.PagingParams;
+import com.hy.ioms.model.dto.AlarmBreakDTO;
 import com.hy.ioms.model.dto.DeviceDTO;
 import com.hy.ioms.model.dto.DeviceStatusDTO;
 import com.hy.ioms.model.dto.ManualPictureDTO;
 import com.hy.ioms.model.dto.ScheduleTaskPictureDTO;
+import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.dto.VideoSenderTaskDTO;
 import com.hy.ioms.model.interaction.DeviceDataInteraction;
 import com.hy.ioms.model.repository.DeviceDataRepository;
@@ -21,6 +23,8 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 /**
  * 设备数据服务
@@ -29,25 +33,29 @@ import io.reactivex.Single;
 @SuppressWarnings("unuesd")
 public class DeviceDataService implements DeviceDataInteraction {
 
-
     @Inject
     public DeviceDataService(DeviceDataRepository deviceDataRepository) {
         this.deviceDataRepository = deviceDataRepository;
     }
-
 
     private DeviceDataRepository deviceDataRepository;
 
     /**
      * 获取设备
      *
-     * @param pagingParams 分页信息
+     * @param page         第几页
+     * @param itemsPerPage 每页的个数
+     * @param sort         排序
+     * @param companyId    公司Id,默认为0
+     * @param circuitId    线路Id,默认为0
+     * @param poleId       杆塔Id,默认为0
      */
     @Override
-    public Single<Page<DeviceVO>> getDevices(PagingParams pagingParams) {
+    public Single<Page<DeviceVO>> getDevices(int page, int itemsPerPage, String sort,
+                                             Long companyId, Long circuitId, Long poleId) {
         Page<DeviceVO> deviceVoPage = new Page<>();
         return deviceDataRepository
-                .getDevices(pagingParams.queryPage, pagingParams.itemsPerPage, pagingParams.sort)
+                .getDevices(page, itemsPerPage, sort, companyId, circuitId, poleId)
                 .doAfterSuccess(deviceVoPage::synchronize)
                 .map(Page::getContent)
                 .map(deviceDTOs -> {
@@ -67,13 +75,15 @@ public class DeviceDataService implements DeviceDataInteraction {
      * 获取计划任务图片
      *
      * @param deviceId     设备id
-     * @param pagingParams 分页信息
+     * @param page         第几页数据
+     * @param itemsPerPage 每页个数
+     * @param sort         排序
      */
     @Override
-    public Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, PagingParams pagingParams) {
+    public Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, int page, int itemsPerPage, String sort) {
         Page<PictureVO> scheduledTaskPictures = new Page<>();
         return deviceDataRepository
-                .getScheduledTaskPictures(deviceId, pagingParams.queryPage, pagingParams.itemsPerPage, pagingParams.sort)
+                .getScheduledTaskPictures(deviceId, page, itemsPerPage, sort)
                 .doAfterSuccess(scheduledTaskPictures::synchronize)
                 .map(Page::getContent)
                 .map(scheduleTaskPictureDTOs -> {
@@ -93,13 +103,15 @@ public class DeviceDataService implements DeviceDataInteraction {
      * 获取手动拍照图片
      *
      * @param deviceId     设备id
-     * @param pagingParams 分页信息
+     * @param page         第几页数据
+     * @param itemsPerPage 每页个数
+     * @param sort         排序
      */
     @Override
-    public Single<Page<PictureVO>> getManualPictures(Long deviceId, PagingParams pagingParams) {
+    public Single<Page<PictureVO>> getManualPictures(Long deviceId, int page, int itemsPerPage, String sort) {
         Page<PictureVO> manualPicturesVOPage = new Page<>();
         return deviceDataRepository
-                .getManualPictures(deviceId, pagingParams.queryPage, pagingParams.itemsPerPage, pagingParams.sort)
+                .getManualPictures(deviceId, page, itemsPerPage, sort)
                 .doAfterSuccess(manualPicturesVOPage::synchronize)
                 .map(Page::getContent)
                 .map(manualPictureDTOs -> {
@@ -116,7 +128,6 @@ public class DeviceDataService implements DeviceDataInteraction {
 
     /**
      * 获取在线设备
-     *
      */
     @Override
     public Single<Set<String>> getOnlineDeviceSet() {
@@ -143,6 +154,40 @@ public class DeviceDataService implements DeviceDataInteraction {
     public Single<VideoStatusVO> getVideoSenderTask(String deviceCode) {
         return deviceDataRepository.getVideoSenderTask(deviceCode)
                 .map(VideoSenderTaskDTO::transform);
+    }
+
+    /**
+     * 获取设备报警个数
+     *
+     * @param id          设备di
+     * @param projectType 设备的项目类型(山火,外破)
+     * @return 报警个数
+     */
+    @Override
+    public Single<Integer> getDeviceAlarmCount(Long id, String projectType) {
+        Single<Integer> countSingle;
+        switch (projectType) {
+            case Config.FIRE_PROJECT: //山火项目
+                countSingle = deviceDataRepository.getDeviceFireAlarm(id, Config.HANDLED, 0, 0, "")
+                        .map(Page::getTotalNumber);
+                break;
+            case Config.BREAK_PROJECT://外破项目
+                countSingle = deviceDataRepository.getDeviceBreakAlarm(id, Config.HANDLED, 0, 0, "")
+                        .map(Page::getTotalNumber);
+                break;
+            default://其他默认为0个报警
+                countSingle = Single.just(0);
+                break;
+        }
+        return countSingle;
+    }
+
+    /**
+     * 获取TreeNode对象
+     */
+    @Override
+    public Single<List<TreeNodeDTO>> getFilterTreeNode() {
+        return deviceDataRepository.getFilterTreeNode();
     }
 
 }

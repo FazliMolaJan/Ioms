@@ -3,7 +3,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:clickable="true"
-          android:drawableLeft="@drawable/ic_format_list_bulleted_white_24dp"
+          android:drawableLeft="@drawable/ic_format_list_bulleted_black_24dp"
           android:id="@+id/filter"
           android:gravity="center"
           android:paddingLeft="10dip"

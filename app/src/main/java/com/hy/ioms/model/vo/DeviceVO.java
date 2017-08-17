@@ -19,6 +19,7 @@ public class DeviceVO implements Parcelable {
     private boolean playAble;
     private boolean smsAble;
     private boolean isOnline;
+    private int alarmCount;
 
     public Long getId() {
         return id;
@@ -108,6 +109,13 @@ public class DeviceVO implements Parcelable {
         this.smsAble = smsAble;
     }
 
+    public int getAlarmCount() {
+        return alarmCount;
+    }
+
+    public void setAlarmCount(int alarmCount) {
+        this.alarmCount = alarmCount;
+    }
 
     @Override
     public int describeContents() {
@@ -127,6 +135,7 @@ public class DeviceVO implements Parcelable {
         dest.writeByte(this.playAble ? (byte) 1 : (byte) 0);
         dest.writeByte(this.smsAble ? (byte) 1 : (byte) 0);
         dest.writeByte(this.isOnline ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.alarmCount);
     }
 
     public DeviceVO() {
@@ -144,9 +153,10 @@ public class DeviceVO implements Parcelable {
         this.playAble = in.readByte() != 0;
         this.smsAble = in.readByte() != 0;
         this.isOnline = in.readByte() != 0;
+        this.alarmCount = in.readInt();
     }
 
-    public static final Creator<DeviceVO> CREATOR = new Creator<DeviceVO>() {
+    public static final Parcelable.Creator<DeviceVO> CREATOR = new Parcelable.Creator<DeviceVO>() {
         @Override
         public DeviceVO createFromParcel(Parcel source) {
             return new DeviceVO(source);
@@ -172,6 +182,7 @@ public class DeviceVO implements Parcelable {
                 ", playAble=" + playAble +
                 ", smsAble=" + smsAble +
                 ", isOnline=" + isOnline +
+                ", alarmCount=" + alarmCount +
                 '}';
     }
 }

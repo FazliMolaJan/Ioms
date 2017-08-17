@@ -2,11 +2,13 @@ package com.hy.ioms.model.interaction;
 
 import com.hy.ioms.model.Page;
 import com.hy.ioms.model.PagingParams;
+import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.vo.DeviceStatusVO;
 import com.hy.ioms.model.vo.DeviceVO;
 import com.hy.ioms.model.vo.PictureVO;
 import com.hy.ioms.model.vo.VideoStatusVO;
 
+import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Single;
@@ -22,25 +24,34 @@ public interface DeviceDataInteraction {
     /**
      * 获取设备
      *
-     * @param pagingParams 分页信息
+     * @param page         第几页
+     * @param itemsPerPage 每页的个数
+     * @param sort         排序
+     * @param companyId    公司Id,默认为0
+     * @param circuitId    线路Id,默认为0
+     * @param poleId       杆塔Id,默认为0
      */
-    Single<Page<DeviceVO>> getDevices(PagingParams pagingParams);
+    Single<Page<DeviceVO>> getDevices(int page, int itemsPerPage, String sort, Long companyId, Long circuitId, Long poleId);
 
     /**
      * 获取计划任务图片
      *
      * @param deviceId     设备id
-     * @param pagingParams 分页信息
+     * @param page         第几页数据
+     * @param itemsPerPage 每页个数
+     * @param sort         排序
      */
-    Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, PagingParams pagingParams);
+    Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, int page, int itemsPerPage, String sort);
 
     /**
      * 获取设备手动拍照图片
      *
      * @param deviceId     设备id
-     * @param pagingParams 分页信息
+     * @param page         第几页数据
+     * @param itemsPerPage 每页个数
+     * @param sort         排序
      */
-    Single<Page<PictureVO>> getManualPictures(Long deviceId, PagingParams pagingParams);
+    Single<Page<PictureVO>> getManualPictures(Long deviceId, int page, int itemsPerPage, String sort);
 
     /**
      * 获取在线设备code列表
@@ -61,4 +72,19 @@ public interface DeviceDataInteraction {
      * @param deviceCode 设备code
      */
     Single<VideoStatusVO> getVideoSenderTask(String deviceCode);
+
+    /**
+     * 获取设备当前报警个数
+     *
+     * @param id          设备di
+     * @param projectType 设备的项目类型(山火,外破)
+     */
+    Single<Integer> getDeviceAlarmCount(Long id, String projectType);
+
+    /**
+     * 获取TreeNode对象
+     */
+    Single<List<TreeNodeDTO>> getFilterTreeNode();
+
+
 }

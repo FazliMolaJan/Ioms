@@ -58,6 +58,7 @@ public class Config {
     public static final String ALARM_BREAK = "alarm_break";
     public static final String ARG_VIDEO_TASK_ID = "arg_video_task_id";
     public static final String ARG_ALARM_TITLE = "arg_alarm_title";
+    public static final String ARG_FILTER_DTO = "arg_filter_dto";
     // res name end
 
     //device detail start
@@ -74,5 +75,8 @@ public class Config {
     public static String STREAM_SERVER_HOST = "117.48.202.207";
     public static String STREAM_SERVER_PORT = "554";
 
+    public static final String FIRE_PROJECT = "山火";
+    public static final String BREAK_PROJECT = "外破";
 
+    public static final int HANDLED = 1;
 }

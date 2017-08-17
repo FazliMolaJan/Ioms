@@ -23,7 +23,6 @@ public class CookieUtils {
         return cookie;
     }
 
-
     public static String getCookie(String csrfToken, String jsessionid, String rememberMe) {
         return "CSRF-TOKEN=" + csrfToken + ";" +
                 "JSESSIONID=" + jsessionid + ";" +

@@ -3,13 +3,14 @@ package vm;
 import android.content.SharedPreferences;
 import android.databinding.BaseObservable;
 import android.databinding.ObservableBoolean;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.hy.ioms.model.interaction.UserInteraction;
 import com.hy.ioms.utils.rx.BaseCompletableObserver;
 import com.hy.ioms.utils.rx.RxJavaUtils;
 import com.hy.ioms.view.IView;
-import com.hy.ioms.view.device.DeviceListActivity;
+import com.hy.ioms.view.main.MainActivity;
 
 import io.reactivex.annotations.NonNull;
 
@@ -44,6 +45,7 @@ public class LoginViewModel extends BaseObservable {
      */
     // TODO: 2017/6/13 这里登陆可以先尝试登陆,发现过期再调用getAuthenticate,等有空了再来修改
     public void login(UserViewModel userViewModel) {
+        Log.d("tag","測試debug信息");
         isLogin.set(true);
         netSharedPreferences.edit().clear().apply(); //主要是为了清除sharedPreferences中的csrfToken和cookie
 
@@ -58,7 +60,7 @@ public class LoginViewModel extends BaseObservable {
                         editor.putString(SP_ACCOUNT, userViewModel.account.get());
                         editor.putString(SP_PASSWORD, userViewModel.password.get());
                         editor.apply();
-                        DeviceListActivity.gotoActivity(view.getContext());
+                        MainActivity.gotoActivity(view.getContext());
                     }
 
                     @Override

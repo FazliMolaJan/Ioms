@@ -6,19 +6,23 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.hy.ioms.App;
 import com.hy.ioms.di.AppComponent;
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * fragment基类封装
  * Created by wsw on 2017/4/8.
  */
 
-public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
+public abstract class BaseFragment<T extends ViewDataBinding> extends RxFragment implements IView{
     protected T b;
 
     @Override
@@ -58,4 +62,13 @@ public abstract class BaseFragment<T extends ViewDataBinding> extends Fragment {
 
     protected abstract void doTransaction();
 
+    @Override
+    public <S> LifecycleTransformer<S> bindLifecycle() {
+        return bindToLifecycle();
+    }
+
+    @Override
+    public LifecycleProvider getLifecycleProvider() {
+        return BaseFragment.this;
+    }
 }

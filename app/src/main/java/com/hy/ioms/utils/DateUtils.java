@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public class DateUtils {
 
-    public static String getTime(String collectTime){
+    public static String getTime(String collectTime) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CHINA);
         Date date = null;
         try {
@@ -20,6 +20,11 @@ public class DateUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return df.format(date).replace("T"," ");
+        return df.format(date).replace("T", " ");
+    }
+    
+    public static String getTime(Date date) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        return df.format(date);
     }
 }

@@ -37,7 +37,7 @@ public class UserViewModel extends BaseObservable implements Serializable {
     public void getUser() {
         if (BuildConfig.DEBUG) {
             account.set("admin");
-            password.set("Hyweb4.0");
+            password.set("admin");
         } else {
             account.set(sharedPreferences.getString(SP_ACCOUNT, ""));
             password.set(sharedPreferences.getString(SP_PASSWORD, ""));

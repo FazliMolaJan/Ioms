@@ -31,7 +31,7 @@ public class UserRepository {
      */
     public Completable login(String account, String password) {
         return iomsApi.getAuthenticate()
-                .andThen(iomsApi.login("account", "password", true));
+                .andThen(iomsApi.login(account, password, true));
     }
 
     /**

@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.hy.ioms.view.device.DeviceListActivity"
-    tools:showIn="@layout/app_bar_device_list">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.hy.ioms.view.device.DeviceListFragment"
+        tools:showIn="@layout/fragment_device_list">
 
-</android.support.constraint.ConstraintLayout>
+    <data>
+
+        <variable
+            name="vm"
+            type="vm.DevicePageDataViewModel"/>
+
+        <import type="com.hy.ioms.view.IView"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onRefresh="@{vm}"
+            app:refreshing="@{vm.dataRefresh}"
+            tools:ignore="PrivateResource">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/device_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                app:footer_item="@{vm.footerItem}"
+                app:is_loading="@{vm.dataLoading}"
+                app:items="@{vm.datas}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:recycler_scroll="@{vm}"
+                tools:ignore="PrivateResource"
+                tools:listitem="@layout/item_device"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,12 +1,15 @@
 package com.hy.ioms.model.net;
 
 
+import com.hy.ioms.model.dto.AlarmBreakDTO;
+import com.hy.ioms.model.dto.AlarmFireDTO;
 import com.hy.ioms.model.dto.DeviceConfigDTO;
 import com.hy.ioms.model.dto.DeviceDTO;
 import com.hy.ioms.model.dto.DeviceStatusDTO;
 import com.hy.ioms.model.dto.ManualPictureDTO;
 import com.hy.ioms.model.dto.ResponseDTO;
 import com.hy.ioms.model.dto.ScheduleTaskResultDTO;
+import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.dto.UserDTO;
 import com.hy.ioms.model.dto.VideoDTO;
 import com.hy.ioms.model.dto.VideoSenderTaskDTO;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Response;
@@ -74,7 +78,8 @@ public interface IomsApi {
      */
     @GET("api/devices")
     Single<Response<List<DeviceDTO>>> getDevices(@Query("page") int page, @Query("size") int size,
-                                                 @Query("sort") String sort);
+                                                 @Query("sort") String sort, @Query("companyId") Long companyId,
+                                                 @Query("circuitId") Long circuitId, @Query("poleId") Long poleId);
 
 
     /**
@@ -253,7 +258,7 @@ public interface IomsApi {
      */
     @GET("api/video/keep")
     Single<ResponseDTO> keepVideo(@Query("deviceCode") String deviceCode,
-                                   @Query("taskId") String taskId);
+                                  @Query("taskId") String taskId);
 
 
     /**
@@ -275,5 +280,54 @@ public interface IomsApi {
     Single<ResponseDTO> operateDevice(@Path("deviceCode") String deviceCode,
                                       @Query("sessionId") String sessionId,
                                       @Query("controlCmd") String controlCmd);
+
+    /**
+     * 根据设备得到山火告警对象
+     *
+     * @param sort      排序
+     * @param page      第几页
+     * @param size      每页的个数
+     * @param deviceId  设备id
+     * @param startTime 开始时间
+     * @param endTime   结束时间
+     * @param deliver   用户只能看到推送了的
+     */
+    @GET("api/alarm-fires")
+    Single<Response<List<AlarmFireDTO>>> getDeviceFireAlarm(@Query("page") int page,
+                                                            @Query("size") int size,
+                                                            @Query("sort") String sort,
+                                                            @Query("deviceId") Long deviceId,
+                                                            @Query("startTime") String startTime,
+                                                            @Query("endTime") String endTime,
+                                                            @Query("deliver") int deliver);
+
+    /**
+     * 根据设备得到外破告警对象
+     *
+     * @param sort      排序
+     * @param page      第几页
+     * @param size      每页的个数
+     * @param deviceId  设备id
+     * @param startTime 开始时间
+     * @param endTime   结束时间
+     * @param deliver   用户只能看到推送了的
+     */
+    @GET("api/alarm-breaks")
+    Single<Response<List<AlarmBreakDTO>>> getDeviceBreakAlarm(@Query("page") int page,
+                                                              @Query("size") int size,
+                                                              @Query("sort") String sort,
+                                                              @Query("deviceId") Long deviceId,
+                                                              @Query("startTime") String startTime,
+                                                              @Query("endTime") String endTime,
+                                                              @Query("deliver") int deliver);
+
+    /**
+     * 获取设备树
+     *
+     * @return
+     */
+    @GET("api/devices/treenode")
+    Single<List<TreeNodeDTO>> getTreeNode();
+
 
 }

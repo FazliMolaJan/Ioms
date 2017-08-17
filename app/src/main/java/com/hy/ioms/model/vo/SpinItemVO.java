@@ -7,7 +7,14 @@ package com.hy.ioms.model.vo;
 
 public class SpinItemVO {
     private String name;
+    private int type;
     private int id;
+
+    public SpinItemVO(String name, int type, int id) {
+        this.name = name;
+        this.type = type;
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -23,5 +30,13 @@ public class SpinItemVO {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

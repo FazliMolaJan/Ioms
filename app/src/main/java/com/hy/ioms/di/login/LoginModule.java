@@ -25,6 +25,7 @@ public class LoginModule {
         this.loginActivity = loginActivity;
     }
 
+    @Named("login")
     @Provides
     @AppScope
     IView provideIView() {
@@ -36,7 +37,7 @@ public class LoginModule {
     LoginViewModel provideLoginViewModel(UserService userService,
                                          @Named("net") SharedPreferences netSharedPreferences,
                                          @Named("normal") SharedPreferences normalSharedPreferences,
-                                         IView view) {
-        return new LoginViewModel(userService, netSharedPreferences, normalSharedPreferences,view);
+                                         @Named("login") IView view) {
+        return new LoginViewModel(userService, netSharedPreferences, normalSharedPreferences, view);
     }
 }

@@ -8,10 +8,7 @@ import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.AppModule;
 import com.hy.ioms.di.DaggerAppComponent;
 import com.hy.ioms.di.net.ApiServiceModule;
-import com.hy.ioms.utils.log.CrashReportingTree;
 import com.squareup.leakcanary.LeakCanary;
-
-import timber.log.Timber;
 
 /**
  * Created by wsw on 2017/7/13.
@@ -41,11 +38,11 @@ public class App extends Application {
                     .build());
         }
 
-        if (BuildConfig.DEBUG) {
-            Timber.plant(new Timber.DebugTree());
-        } else {
-            Timber.plant(new CrashReportingTree());
-        }
+//        if (BuildConfig.DEBUG) {
+//            Timber.plant(new Timber.DebugTree());
+//        } else {
+//            Timber.plant(new CrashReportingTree());
+//        }
 
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))

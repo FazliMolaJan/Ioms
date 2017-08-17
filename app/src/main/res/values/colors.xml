@@ -10,6 +10,7 @@
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="black_overlay">#66000000</color>
     <color name="colorTransparent">#00ffffff</color>
+    <color name="colorSubWhite">#f2f0f0</color>
 
     <color name="colorStart">#cb5ed9</color>
     <color name="colorEnd">#8463d4</color>

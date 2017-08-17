@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MockRetrofit {
     private static String baseUrl = "http://www7.ioms.com.cn:9090";
+//    private static String baseUrl = "http://172.16.16.121:8080";
     private static String CSRF_TOKEN = "";
     private static String JSESSIONID = "";
     private static String REMEMBER_ME = "";

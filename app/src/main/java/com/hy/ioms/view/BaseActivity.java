@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.hy.ioms.App;
 import com.hy.ioms.di.AppComponent;
+import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
@@ -51,7 +52,7 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends RxAppCompa
     protected abstract void doTransaction();
 
     @Override
-    public FragmentActivity getFragmentActivity() {
+    public LifecycleProvider getLifecycleProvider() {
         return BaseActivity.this;
     }
 

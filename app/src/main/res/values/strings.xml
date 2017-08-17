@@ -1,13 +1,20 @@
 <resources>
+
+
+
     <!-- Strings related to application  start -->
     <string name="app_name">智能监测</string>
     <string name="action_settings">设置</string>
-    <string name="action_update">检查升级</string>
-    <string name="action_url_setting">服务器地址设置</string>
-    <string name="title_activity_login">登录</string>
+
+    <string name="exit_message">再点击一次退出程序</string>
+
     <!-- Strings related to application  end -->
 
     <!-- Strings related to login  start -->
+    <string name="action_update">检查升级</string>
+    <string name="action_url_setting">服务器地址设置</string>
+    <string name="title_activity_login">登录</string>
+
     <string name="login_prompt_account">账号</string>
     <string name="login_prompt_password">密码</string>
     <string name="login_action_sign_in_short">登录</string>
@@ -32,5 +39,25 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="filter">筛选</string>
+    <string name="title_activity_main">MainActivity</string>
     <!-- Strings related to login end-->
+
+
+    <string name="main_nav_title_device">设备</string>
+    <string name="main_nav_title_picture">图片</string>
+    <string name="main_nav_title_alarm">报警</string>
+
+
+    <string name="device_fragment_title">设备列表</string>
+    <string name="item_no_data_message">-----无更多数据-----</string>
+    <string name="item_footer_error_message">出现错误,请重试</string>
+    <string name="item_retry_btn">重试</string>
+
+    <string name="bottom_sheet_device_title">设备筛选</string>
+    <string name="bottom_sheet_device_company_label">公司</string>
+    <string name="bottom_sheet_device_circuit_label">线路</string>
+    <string name="bottom_sheet_device_search">搜索</string>
+    <string name="bottom_sheet_device_reset">重置</string>
+    <string name="bottom_sheet_device_pole_label">杆塔</string>
+
 </resources>

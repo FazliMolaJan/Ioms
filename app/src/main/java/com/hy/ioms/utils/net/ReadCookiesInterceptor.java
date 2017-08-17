@@ -30,20 +30,23 @@ public class ReadCookiesInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        final Request.Builder builder = chain.request().newBuilder();
-        String cookie = sharedPreferences.getString(Config.SP_COOKIE, Config.DEFAULT_COOKIE);
-        String csrfToken = sharedPreferences.getString(Config.SP_CSRF_TOKEN, Config
-                .DEFAULT_CSRF_TOKEN);
-        String jsessionid = sharedPreferences.getString(Config.SP_JSESSIONID, Config
-                .DEFAULT_JSESSIONID);
-        String rememberMe = sharedPreferences.getString(Config.SP_REMEMBER_ME, Config
-                .DEFAULT_REMEMBER_ME);
-        Log.i(TAG, "cookie: " + cookie);
-        Log.i(TAG, "csrfToken: " + csrfToken);
-        builder.addHeader("Cookie", cookie);
-        builder.addHeader("JSESSIONID", jsessionid);
-        builder.addHeader("remember-me", rememberMe);
-        builder.addHeader("X-CSRF-TOKEN", csrfToken);
-        return chain.proceed(builder.build());
+        Request request = chain.request();
+        if (!request.url().toString().endsWith("authenticate")) {
+            final Request.Builder builder = chain.request().newBuilder();
+            String cookie = sharedPreferences.getString(Config.SP_COOKIE, Config.DEFAULT_COOKIE);
+            String csrfToken = sharedPreferences.getString(Config.SP_CSRF_TOKEN, Config
+                    .DEFAULT_CSRF_TOKEN);
+            String jsessionid = sharedPreferences.getString(Config.SP_JSESSIONID, Config
+                    .DEFAULT_JSESSIONID);
+            String rememberMe = sharedPreferences.getString(Config.SP_REMEMBER_ME, Config
+                    .DEFAULT_REMEMBER_ME);
+            builder.addHeader("Cookie", cookie);
+            builder.addHeader("JSESSIONID", jsessionid);
+            builder.addHeader("remember-me", rememberMe);
+            builder.addHeader("X-CSRF-TOKEN", csrfToken);
+            return chain.proceed(builder.build());
+        } else {
+            return chain.proceed(request);
+        }
     }
 }
