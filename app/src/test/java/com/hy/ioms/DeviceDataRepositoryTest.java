@@ -54,7 +54,7 @@ public class DeviceDataRepositoryTest extends BaseTest {
 
         TestObserver testObserver = new TestObserver();
 
-        login().andThen(deviceDataRepository.getDevices(2, 10, ""))
+        login().andThen(deviceDataRepository.getDevices(2, 10, "", 0L, 0L, 0L))
                 .subscribe(testObserver);
     }
 

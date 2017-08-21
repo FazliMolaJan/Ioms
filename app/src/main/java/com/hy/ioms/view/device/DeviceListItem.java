@@ -4,6 +4,7 @@ package com.hy.ioms.view.device;
 import com.hy.ioms.Config;
 import com.hy.ioms.R;
 import com.hy.ioms.model.vo.DeviceVO;
+import com.hy.ioms.view.device.detail.DeviceDetailActivity;
 import com.hy.ioms.view.ui.recycler.BaseItem;
 
 /**
@@ -24,7 +25,7 @@ public class DeviceListItem extends BaseItem {
         setOnClickListener(view -> {
             switch (view.getId()) {
                 case R.id.device_card:
-//                    DeviceDetailActivity.gotoActivity(view.getContext(), deviceVO);
+                    DeviceDetailActivity.gotoActivity(view.getContext(), deviceVO);
                     break;
                 case R.id.item_device_alarm_btn:
 //                    AlarmActivity.gotoActivity(view.getContext(),deviceVO);

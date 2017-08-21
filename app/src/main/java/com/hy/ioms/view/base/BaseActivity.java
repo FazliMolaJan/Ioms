@@ -1,4 +1,4 @@
-package com.hy.ioms.view;
+package com.hy.ioms.view.base;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -6,10 +6,10 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 
 import com.hy.ioms.App;
 import com.hy.ioms.di.AppComponent;
+import com.hy.ioms.view.IView;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;

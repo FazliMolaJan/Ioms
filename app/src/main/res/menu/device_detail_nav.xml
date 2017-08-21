@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_state"
+        android:icon="@drawable/ic_show_chart_black_24dp"
+        android:title="@string/device_detail_nav_title_state"/>
+
+    <item
+        android:id="@+id/navigation_picture"
+        android:icon="@drawable/ic_menu_gallery"
+        android:title="@string/device_detail_nav_title_picture"/>
+
+    <item
+        android:id="@+id/navigation_alarm"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/device_detail_nav_title_alarm"/>
+
+    <item
+        android:id="@+id/navigation_operate"
+        android:icon="@drawable/ic_touch_app_black_24dp"
+        android:title="@string/device_detail_nav_title_operate"/>
+</menu>

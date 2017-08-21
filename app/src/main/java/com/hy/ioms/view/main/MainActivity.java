@@ -11,14 +11,16 @@ import com.hy.ioms.R;
 import com.hy.ioms.databinding.ActivityMainBinding;
 import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.main.DaggerMainComponent;
-import com.hy.ioms.view.BaseActivity;
+import com.hy.ioms.view.base.BaseActivity;
 import com.hy.ioms.view.device.DeviceListFragment;
 import com.hy.ioms.view.ui.viewpager.FragmentAdapter;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import vm.MainViewModel;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
@@ -29,6 +31,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     private MenuItem menuItem;
 
     private long mExitTime;
+
+    @Inject
+    MainViewModel mainViewModel;
+
 
     @Override
     protected void setupActivityComponent(AppComponent appComponent) {
@@ -45,7 +51,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void beforeSetViews() {
-
+        b.setVm(mainViewModel);
     }
 
     @Override

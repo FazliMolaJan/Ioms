@@ -10,9 +10,7 @@ import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.device.DaggerDeviceComponent;
 import com.hy.ioms.di.device.DeviceModule;
 import com.hy.ioms.model.dto.FilterDTO;
-import com.hy.ioms.utils.event.EventMessage;
-import com.hy.ioms.view.BaseFragment;
-import com.hy.ioms.view.main.MainActivity;
+import com.hy.ioms.view.base.BaseFragment;
 import com.hy.ioms.view.ui.recycler.MultipleTypeAdapter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -58,9 +56,9 @@ public class DeviceListFragment extends BaseFragment<FragmentDeviceListBinding> 
     protected void beforeSetViews() {
         eventViewModel.setOnClick(view -> {
             if (view == b.filter) {
-                DeviceFilterBottomSheetDialogFragment deviceFilterBottomSheetDialogFragment =
-                        DeviceFilterBottomSheetDialogFragment.newInstance(devicePageDataViewModel.getFilterDTO());
-                deviceFilterBottomSheetDialogFragment.show(getChildFragmentManager(), null);
+                DeviceFilterFragment deviceFilterFragment =
+                        DeviceFilterFragment.newInstance(devicePageDataViewModel.getFilterDTO());
+                deviceFilterFragment.show(getChildFragmentManager(), null);
             }
         });
 

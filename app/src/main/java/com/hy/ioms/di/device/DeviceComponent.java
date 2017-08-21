@@ -2,10 +2,8 @@ package com.hy.ioms.di.device;
 
 import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.AppScope;
-import com.hy.ioms.di.login.LoginModule;
-import com.hy.ioms.view.device.DeviceFilterBottomSheetDialogFragment;
+import com.hy.ioms.view.device.DeviceFilterFragment;
 import com.hy.ioms.view.device.DeviceListFragment;
-import com.hy.ioms.view.main.MainActivity;
 
 import dagger.Component;
 
@@ -19,5 +17,5 @@ import dagger.Component;
 public interface DeviceComponent {
     void inject(DeviceListFragment deviceListFragment);
 
-    void inject(DeviceFilterBottomSheetDialogFragment deviceFilterBottomSheetDialogFragment);
+    void inject(DeviceFilterFragment deviceFilterFragment);
 }

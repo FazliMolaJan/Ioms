@@ -33,6 +33,11 @@ android {
             buildConfigField("String", "NET_SP_NAME", "\"net_monitor_sp\"")
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']  /**在libs文件夹下找so文件*/
+        }
+    }
 
     dataBinding {
         enabled = true
@@ -40,6 +45,13 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs' /**在libs文件夹下找aar文件*/
     }
 }
 
@@ -59,6 +71,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile(name: 'ijkplayer-java-release', ext: 'aar')
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger2"
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakcanary"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary"
@@ -89,6 +102,9 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.jakewharton.timber:timber:4.5.1'
+    compile 'com.android.support:design:26.+'
+    compile 'com.android.support:support-v4:26.+'
+    compile 'com.android.support:recyclerview-v7:26.+'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:2.8.47'
     testCompile 'org.robolectric:robolectric:3.4'

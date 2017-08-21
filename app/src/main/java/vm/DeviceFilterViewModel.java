@@ -1,17 +1,15 @@
 package vm;
 
 import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.util.Pair;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
-import com.hy.ioms.BR;
 import com.hy.ioms.model.dto.FilterDTO;
 import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.interaction.DeviceDataInteraction;
@@ -20,16 +18,18 @@ import com.hy.ioms.utils.TreeNodeUtils;
 import com.hy.ioms.utils.rx.BaseSingleObserver;
 import com.hy.ioms.utils.rx.RxJavaUtils;
 import com.hy.ioms.view.IView;
-import com.hy.ioms.view.device.DeviceFilterBottomSheetDialogFragment;
+import com.hy.ioms.view.ui.spinner.FilterSpinnerAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
+
+import static com.hy.ioms.view.ui.spinner.FilterSpinnerAdapter.CIRCUIT;
+import static com.hy.ioms.view.ui.spinner.FilterSpinnerAdapter.COMPANY;
+import static com.hy.ioms.view.ui.spinner.FilterSpinnerAdapter.DEVICE;
+import static com.hy.ioms.view.ui.spinner.FilterSpinnerAdapter.POLE;
 
 
 /**
@@ -38,22 +38,51 @@ import io.reactivex.functions.Consumer;
  */
 
 public class DeviceFilterViewModel extends BaseObservable {
-
     private DeviceDataInteraction deviceDataInteraction;
     private IView view;
 
-    private ObservableField<FilterDTO> filter = new ObservableField<>();
+    public ObservableField<FilterDTO> filter = new ObservableField<>();
     public ObservableList<TreeNodeDTO> treeNodeDTO = new ObservableArrayList<>();
     public ObservableList<SpinItemVO> companies = new ObservableArrayList<>();
     public ObservableList<SpinItemVO> circuits = new ObservableArrayList<>();
     public ObservableList<SpinItemVO> poles = new ObservableArrayList<>();
     public ObservableList<SpinItemVO> devices = new ObservableArrayList<>();
+    public AdapterView.OnItemSelectedListener onItemSelected;
 
     public ObservableBoolean loading = new ObservableBoolean(true);
 
     public DeviceFilterViewModel(DeviceDataInteraction deviceDataInteraction, IView view) {
         this.deviceDataInteraction = deviceDataInteraction;
         this.view = view;
+        onItemSelected = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                SpinItemVO spinItemVO = (SpinItemVO) adapterView.getItemAtPosition(position);
+                FilterDTO filterDTO = filter.get();
+                @FilterSpinnerAdapter.Type int type = spinItemVO.getType();
+                switch (type) {
+                    case COMPANY:
+                        filterDTO.setCompanyId((long) spinItemVO.getId());
+                        break;
+                    case CIRCUIT:
+                        filterDTO.setCircuitId((long) spinItemVO.getId());
+                        break;
+                    case POLE:
+                        filterDTO.setPoleId((long) spinItemVO.getId());
+                        break;
+                    case DEVICE:
+                        filterDTO.setDeviceId((long) spinItemVO.getId());
+                        break;
+                }
+                filter.set(filterDTO);
+                refreshFilter();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        };
     }
 
     public void getFilterTreeNode() {
@@ -80,21 +109,7 @@ public class DeviceFilterViewModel extends BaseObservable {
         ((BottomSheetDialogFragment) view).dismiss();
     }
 
-    public void reset() {
-//        filter.set(new FilterDTO());
-//        refreshFilter();
-    }
-
     public void refreshFilter() {
         TreeNodeUtils.treeNodeAnalysis(treeNodeDTO, filter.get(), companies, circuits, poles);
-        System.out.println(poles.size());
-    }
-
-    public ObservableField<FilterDTO> getFilter() {
-        return filter;
-    }
-
-    public void setFilter(ObservableField<FilterDTO> filter) {
-        this.filter = filter;
     }
 }

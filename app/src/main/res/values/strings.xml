@@ -1,7 +1,6 @@
 <resources>
 
 
-
     <!-- Strings related to application  start -->
     <string name="app_name">智能监测</string>
     <string name="action_settings">设置</string>
@@ -47,6 +46,11 @@
     <string name="main_nav_title_picture">图片</string>
     <string name="main_nav_title_alarm">报警</string>
 
+    <string name="device_detail_nav_title_state">状态</string>
+    <string name="device_detail_nav_title_operate">操作</string>
+    <string name="device_detail_nav_title_device">设备</string>
+    <string name="device_detail_nav_title_picture">图片</string>
+    <string name="device_detail_nav_title_alarm">报警</string>
 
     <string name="device_fragment_title">设备列表</string>
     <string name="item_no_data_message">-----无更多数据-----</string>
@@ -59,5 +63,9 @@
     <string name="bottom_sheet_device_search">搜索</string>
     <string name="bottom_sheet_device_reset">重置</string>
     <string name="bottom_sheet_device_pole_label">杆塔</string>
+    <string name="title_activity_device_detail">DeviceDetailActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

@@ -1,13 +1,11 @@
 package com.hy.ioms.view.login;
 
-import android.content.Context;
-
 import com.hy.ioms.R;
 import com.hy.ioms.databinding.ActivityLoginBinding;
 import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.login.DaggerLoginComponent;
 import com.hy.ioms.di.login.LoginModule;
-import com.hy.ioms.view.BaseActivity;
+import com.hy.ioms.view.base.BaseActivity;
 
 import javax.inject.Inject;
 
