@@ -67,5 +67,16 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="time_filter_start_time">开始时间</string>
+    <string name="time_filter_end_time">结束时间</string>
+    <string name="time_filter_submit">确定</string>
+    <string name="filter_bottom_sheet_start_time_label">开始时间</string>
+    <string name="filter_bottom_sheet_end_time_label">结束时间</string>
+    <string name="filter_bottom_sheet_search">搜索</string>
+    <string name="filter_bottom_sheet_title">条件过滤</string>
+    <string name="filter_bottom_sheet_company_label">公司</string>
+    <string name="filter_bottom_sheet_circuit_label">线路</string>
+    <string name="filter_bottom_sheet_pole_label">杆塔</string>
+    <string name="filter_bottom_sheet_device_label">设备</string>
 
 </resources>

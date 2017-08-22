@@ -37,7 +37,9 @@ public class SpinnerBindingAdapter {
     @BindingAdapter("datas")
     public static void setDatas(Spinner spinner, List<SpinItemVO> datas) {
         FilterSpinnerAdapter adapter = (FilterSpinnerAdapter) spinner.getAdapter();
-        adapter.init(datas);
+        if (adapter != null) {
+            adapter.init(datas);
+        }
     }
 //    @BindingAdapter(value = {"on_selected"}, requireAll = false)
 //    public static void setOnItemSelectedListener(Spinner spinner, DeviceFilterViewModel deviceFilterViewModel) {

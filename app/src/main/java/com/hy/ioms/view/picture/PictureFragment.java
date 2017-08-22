@@ -15,6 +15,7 @@ import com.hy.ioms.model.vo.SpinItemVO;
 import com.hy.ioms.view.base.BaseFragment;
 import com.hy.ioms.view.device.DeviceFilterFragment;
 import com.hy.ioms.view.device.DeviceListFragment;
+import com.hy.ioms.view.filter.FilterBottomSheetFragment;
 import com.hy.ioms.view.ui.recycler.MultipleTypeAdapter;
 import com.hy.ioms.view.ui.spinner.SimpleSpinnerAdapter;
 
@@ -56,13 +57,13 @@ public class PictureFragment extends BaseFragment<FragmentPictureListBinding> {
 
     @Override
     protected void beforeSetViews() {
-//        eventViewModel.setOnClick(view -> {
-//            if (view == b.filter) {
-//                DeviceFilterFragment deviceFilterFragment =
-//                        DeviceFilterFragment.newInstance(devicePageDataViewModel.getFilterDTO());
-//                deviceFilterFragment.show(getChildFragmentManager(), null);
-//            }
-//        });
+        eventViewModel.setOnClick(view -> {
+            if (view == b.filter) {
+                FilterBottomSheetFragment filterBottomSheetFragment =
+                        FilterBottomSheetFragment.newInstance(pictureViewModel.getFilterDTO());
+                filterBottomSheetFragment.show(getChildFragmentManager(), null);
+            }
+        });
         b.setEvent(eventViewModel);
         b.setVm(pictureViewModel);
     }

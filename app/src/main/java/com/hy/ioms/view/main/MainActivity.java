@@ -11,12 +11,10 @@ import com.hy.ioms.R;
 import com.hy.ioms.databinding.ActivityMainBinding;
 import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.main.DaggerMainComponent;
+import com.hy.ioms.di.main.MainModule;
 import com.hy.ioms.view.base.BaseActivity;
-import com.hy.ioms.view.device.DeviceListFragment;
-import com.hy.ioms.view.picture.PictureFragment;
 import com.hy.ioms.view.ui.viewpager.FragmentAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,6 +42,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void setupActivityComponent(AppComponent appComponent) {
         DaggerMainComponent.builder()
                 .appComponent(appComponent)
+                .mainModule(new MainModule(this))
                 .build()
                 .inject(this);
     }
@@ -99,7 +98,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             }
         });
         //禁止ViewPager滑动
-        b.viewpager.setOnTouchListener((v, event) -> true);
+//        b.viewpager.setOnTouchListener((v, event) -> true);
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         b.viewpager.setAdapter(fragmentAdapter);
     }
