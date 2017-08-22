@@ -17,7 +17,11 @@
             android:name=".view.login.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
             android:name=".view.main.MainActivity"
@@ -33,11 +37,7 @@
                 android:value="com.hy.ioms.view.main.MainActivity"/>
         </activity>
         <activity android:name=".view.video.VideoActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
     </application>
 
