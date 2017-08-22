@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.hy.ioms.view.picture.PictureItem" />
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/item_picture_layout_margin">
+
+        <ImageView
+            android:id="@+id/item_picture_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/item_picture_image_desc"
+            android:onClick="@{item.onClickListener::onClick}"
+            android:scaleType="fitCenter"
+            app:image="@{item.url}"
+            android:minHeight="100dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/item_picture_date"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="@{item.date}"
+            android:onClick="@{item.onClickListener::onClick}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_picture_image"
+            tools:text="2017-04-10" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

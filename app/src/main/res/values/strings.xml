@@ -53,7 +53,7 @@
     <string name="device_detail_nav_title_alarm">报警</string>
 
     <string name="device_fragment_title">设备列表</string>
-    <string name="item_no_data_message">-----无更多数据-----</string>
+    <string name="item_no_data_message">-----无数据-----</string>
     <string name="item_footer_error_message">出现错误,请重试</string>
     <string name="item_retry_btn">重试</string>
 
