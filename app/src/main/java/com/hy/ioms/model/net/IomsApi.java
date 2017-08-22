@@ -85,16 +85,22 @@ public interface IomsApi {
     /**
      * 获取手动拍照图片
      *
-     * @param deviceId 设备id
-     * @param page     页数
-     * @param size     每页个数
-     * @param sort     排序
+     * @param page      页数
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
      */
-    @GET("api/{deviceId}/pic-manuals")
+    @GET("api/pic-manuals")
     Single<Response<List<ManualPictureDTO>>>
-    getManualPictures(@Path("deviceId") Long deviceId, @Query("page") int page,
-                      @Query("size") int size, @Query("sort") String sort);
-
+    getManualPictures(@Query("page") int page, @Query("size") int size, @Query("sort") String sort,
+                      @Query("companyId") Long companyId, @Query("circuitId") Long circuitId,
+                      @Query("poleId") Long poleId, @Query("deviceId") Long deviceId,
+                      @Query("startTime") String startTime, @Query("endTime") String endTime);
 
     /**
      * 根据SessionId获取手动拍照图片
@@ -112,10 +118,12 @@ public interface IomsApi {
      * @param size     每页个数
      * @param sort     排序
      */
-    @GET("api/{deviceId}/schedule-task-results")
+    @GET("api/schedule-task-results/picture")
     Single<Response<List<ScheduleTaskResultDTO>>>
-    getScheduleTaskPictures(@Path("deviceId") Long deviceId, @Query("page") int page,
-                            @Query("size") int size, @Query("sort") String sort);
+    getScheduleTaskPictures(@Query("page") int page, @Query("size") int size, @Query("sort") String sort,
+                            @Query("companyId") Long companyId, @Query("circuitId") Long circuitId,
+                            @Query("poleId") Long poleId, @Query("deviceId") Long deviceId,
+                            @Query("startTime") String startTime, @Query("endTime") String endTime);
 
     /**
      * 获取在线设备set

@@ -18,7 +18,7 @@ public class VideoActivity extends AppCompatActivity {
 
     private static final String TAG = "VideoActivity";
 
-    String mVideoPath = "rtsp://117.48.202.207:554/EmdRealTimeVideo-HY_OLMS_YS_000023-Emd.Service.VideoSender.E0-1.sdp";
+    String mVideoPath = "rtsp://117.48.202.207:554/EmdRealTimeVideo-HY_OLMS_YS_000023-Emd.Service.VideoSender.E0-2.sdp";
     IjkMediaPlayer mediaPlayer;
     SurfaceHolder surfaceHolder;
 
@@ -45,8 +45,6 @@ public class VideoActivity extends AppCompatActivity {
             }
         });
 
-
-
         findViewById(R.id.floatingActionButton).setOnClickListener(view -> mediaPlayer.prepareAsync());
     }
 
@@ -57,11 +55,33 @@ public class VideoActivity extends AppCompatActivity {
 
         mediaPlayer = new IjkMediaPlayer();
 
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp ");
+//
+//        mediaPlayer.setOption(1, "analyzemaxduration", 100L);
+//        mediaPlayer.setOption(1, "probesize", 10240L);
+//        mediaPlayer.setOption(1, "flush_packets", 1L);
+//        mediaPlayer.setOption(4, "packet-buffering", 0L);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max_cached_duration", 3000);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "infbuf", 1);
+
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "analyzeduration", 50000);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 0);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_frame", 0);
+
+//        mediaPlayer.setOption(4, "framedrop", 1L);
+
+
+
         mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "start-on-prepared", 0);
         mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "http-detect-range-support", 0);
-        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 8);
+        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 48);
+//        mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC, "skip_loop_filter", 8);
         mediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "rtsp_transport", "tcp ");
 
+        Log.i(TAG, "yyh debug .... set ok...");
+//YYH add
         mediaPlayer.setOption(1, "analyzemaxduration", 100L);
         mediaPlayer.setOption(1, "probesize", 10240L);
         mediaPlayer.setOption(1, "flush_packets", 1L);

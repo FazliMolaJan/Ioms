@@ -7,10 +7,11 @@ import android.os.Parcelable;
  * Created by wsw on 2017/4/11.
  */
 
-public class PictureVO implements Parcelable {
+public class PictureVO{
     private String url;
     private String thumbUrl;
     private String date;
+    private String deviceCode;
 
     public String getUrl() {
         return url;
@@ -41,37 +42,16 @@ public class PictureVO implements Parcelable {
         this.thumbUrl = url.replace(".jpeg", "-sm.jpeg");
     }
 
+    public String getDeviceCode() {
+        return deviceCode;
+    }
+
+    public void setDeviceCode(String deviceCode) {
+        this.deviceCode = deviceCode;
+    }
+
     public PictureVO() {
     }
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.url);
-        dest.writeString(this.thumbUrl);
-        dest.writeString(this.date);
-    }
-
-    protected PictureVO(Parcel in) {
-        this.url = in.readString();
-        this.thumbUrl = in.readString();
-        this.date = in.readString();
-    }
-
-    public static final Creator<PictureVO> CREATOR = new Creator<PictureVO>() {
-        @Override
-        public PictureVO createFromParcel(Parcel source) {
-            return new PictureVO(source);
-        }
-
-        @Override
-        public PictureVO[] newArray(int size) {
-            return new PictureVO[size];
-        }
-    };
 }

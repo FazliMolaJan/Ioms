@@ -13,6 +13,7 @@ import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.main.DaggerMainComponent;
 import com.hy.ioms.view.base.BaseActivity;
 import com.hy.ioms.view.device.DeviceListFragment;
+import com.hy.ioms.view.picture.PictureFragment;
 import com.hy.ioms.view.ui.viewpager.FragmentAdapter;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Inject
     MainViewModel mainViewModel;
+
+    @Inject
+    List<Fragment> fragmentList;
 
 
     @Override
@@ -96,14 +100,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         });
         //禁止ViewPager滑动
         b.viewpager.setOnTouchListener((v, event) -> true);
-//
-        Fragment pictureFragment;
-        Fragment alarmFragment;
-
-        List<Fragment> fragmentList = new ArrayList<>();
-        fragmentList.add(DeviceListFragment.newInstance());
-//        fragmentList.add(DeviceListFragment.newInstance());
-//        fragmentList.add(DeviceListFragment.newInstance());
         FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), fragmentList);
         b.viewpager.setAdapter(fragmentAdapter);
     }

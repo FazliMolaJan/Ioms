@@ -1,12 +1,18 @@
 package com.hy.ioms.di.main;
 
 import android.content.SharedPreferences;
+import android.support.v4.app.Fragment;
 
 import com.hy.ioms.di.AppScope;
 import com.hy.ioms.model.service.UserService;
 import com.hy.ioms.view.IView;
+import com.hy.ioms.view.device.DeviceListFragment;
 import com.hy.ioms.view.login.LoginActivity;
 import com.hy.ioms.view.main.MainActivity;
+import com.hy.ioms.view.picture.PictureFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -34,9 +40,13 @@ public class MainModule {
         return mainActivity;
     }
 
-//    @Provides
-//    @AppScope
-//    MainViewModel provideMainViewModel(IView view) {
-//        return new MainViewModel(userService, netSharedPreferences, normalSharedPreferences,view);
-//    }
+    @Provides
+    @AppScope
+    List<Fragment> provideFragmentList() {
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(DeviceListFragment.newInstance());
+        fragmentList.add(PictureFragment.newInstance());
+//        fragmentList.add(DeviceListFragment.newInstance());
+        return fragmentList;
+    }
 }

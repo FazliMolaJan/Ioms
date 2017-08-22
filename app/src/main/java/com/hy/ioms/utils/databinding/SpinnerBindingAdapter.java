@@ -9,6 +9,7 @@ import android.databinding.adapters.AdapterViewBindingAdapter;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -71,7 +72,7 @@ public class SpinnerBindingAdapter {
 //        });
 //    }
 
-//    @InverseBindingMethods({
+    //    @InverseBindingMethods({
 //            @InverseBindingMethod(
 //                    type=android.widget.Spinner.class,
 //                    attribute=android:text,

@@ -31,27 +31,43 @@ public interface DeviceDataInteraction {
      * @param circuitId    线路Id,默认为0
      * @param poleId       杆塔Id,默认为0
      */
-    Single<Page<DeviceVO>> getDevices(int page, int itemsPerPage, String sort, Long companyId, Long circuitId, Long poleId);
+    Single<Page<DeviceVO>> getDevices(int page, int itemsPerPage, String sort, Long companyId,
+                                      Long circuitId, Long poleId);
 
     /**
      * 获取计划任务图片
      *
-     * @param deviceId     设备id
+     *
      * @param page         第几页数据
      * @param itemsPerPage 每页个数
      * @param sort         排序
+     * @param companyId    公司Id
+     * @param circuitId    线路Id
+     * @param poleId       杆塔Id
+     * @param deviceId     设备id
+     * @param startTime    开始时间,为空则是全查
+     * @param endTime      结束时间,默认为当天
      */
-    Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, int page, int itemsPerPage, String sort);
+    Single<Page<PictureVO>> getScheduledTaskPictures(int page, int itemsPerPage, String sort, Long companyId,
+                                                     Long circuitId, Long poleId, Long deviceId,
+                                                     String startTime, String endTime);
 
     /**
      * 获取设备手动拍照图片
      *
-     * @param deviceId     设备id
      * @param page         第几页数据
      * @param itemsPerPage 每页个数
      * @param sort         排序
+     * @param companyId    公司Id
+     * @param circuitId    线路Id
+     * @param poleId       杆塔Id
+     * @param deviceId     设备id
+     * @param startTime    开始时间,为空则是全查
+     * @param endTime      结束时间,默认为当天
      */
-    Single<Page<PictureVO>> getManualPictures(Long deviceId, int page, int itemsPerPage, String sort);
+    Single<Page<PictureVO>> getManualPictures(int page, int itemsPerPage, String sort, Long companyId,
+                                              Long circuitId, Long poleId, Long deviceId,
+                                              String startTime, String endTime);
 
     /**
      * 获取在线设备code列表

@@ -81,26 +81,6 @@ public class DevicePageDataViewModel extends BasePageDataViewModel<DeviceVO, Dev
     }
 
     @Override
-    public void beforeLoadMore() {
-        super.beforeLoadMore();
-    }
-
-    @Override
-    public void beforeRefresh() {
-        super.beforeRefresh();
-    }
-
-    @Override
-    public void afterLoadMore() {
-        super.afterLoadMore();
-    }
-
-    @Override
-    public void afterRefresh() {
-        super.afterRefresh();
-    }
-
-    @Override
     public DeviceListItem transform(DeviceVO deviceVO) {
         return new DeviceListItem(deviceVO);
     }
@@ -145,6 +125,9 @@ public class DevicePageDataViewModel extends BasePageDataViewModel<DeviceVO, Dev
 //        deviceVO.setAlarmCount(0);
     }
 
+    /**
+     * 获取设备最后的处理者
+     */
     private BaseSingleObserver<List<DeviceListItem>> getDeviceObserver() {
         return new BaseSingleObserver<List<DeviceListItem>>(view.getContext()) {
             @Override

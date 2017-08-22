@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:name="com.hy.ioms.view.picture.PictureFragment"
         tools:context="com.hy.ioms.view.picture.PictureFragment">
@@ -8,65 +9,63 @@
     <data>
 
         <variable
+            name="event"
+            type="vm.EventViewModel"/>
+
+        <variable
             name="vm"
             type="vm.PicturePageViewModel"/>
 
-        <import type="android.view.View"/>
-
-        <variable
-            name="isError"
-            type="Boolean"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
-
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        >
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/fragment_picture_refresh"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/fragment_picture_rv"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:scrollbarStyle="outsideOverlay"
-                android:visibility="@{isError ? View.GONE : View.VISIBLE}"
-                app:footer_item="@{vm.footerItem}"
-                app:is_loading="@{vm.dataLoading}"
-                app:items="@{vm.datas}"
-                app:layoutManager="LinearLayoutManager"
-                app:onRefresh="@{vm}"
-                app:recycler_scroll="@{vm}"
-                app:refreshing="@{vm.dataRefresh}"
-                tools:ignore="PrivateResource"
-                tools:listitem="@layout/fragment_picture"
-                tools:visibility="visible"
-                />
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+                <Spinner
+                    android:id="@+id/sp_picture_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    app:onItemSelected="@{vm.onItemSelected}"
+                    tools:listitem="@layout/white_spinner_item">
+                </Spinner>
 
-        <TextView
-            android:id="@+id/error_message"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="@string/item_no_data_message"
-            android:visibility="@{isError ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible"/>
+                <Button
+                    android:id="@+id/filter"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_filter_while_24dp"
+                    android:gravity="center"
+                    android:onClick="@{event.onClick}"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/filter"
+                    android:textColor="@color/material_light_white"/>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
 
-    </android.support.constraint.ConstraintLayout>
+        <include
+            android:id="@+id/device_content"
+            layout="@layout/content_picture_list"
+            bind:vm="@{vm}"/>
+
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

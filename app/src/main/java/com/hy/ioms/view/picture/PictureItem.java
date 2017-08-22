@@ -12,7 +12,7 @@ import com.hy.ioms.view.ui.recycler.BaseItem;
  * Created by wsw on 2017/4/10.
  */
 
-public class PictureItem extends BaseItem implements Parcelable {
+public class PictureItem extends BaseItem{
     private static final String TAG = "PictureItem";
 
     @Override
@@ -46,29 +46,8 @@ public class PictureItem extends BaseItem implements Parcelable {
         return mPictureVO.getDate();
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getDeviceCode(){
+        return mPictureVO.getDeviceCode();
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.mPictureVO, flags);
-    }
-
-    protected PictureItem(Parcel in) {
-        this.mPictureVO = in.readParcelable(PictureVO.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<PictureItem> CREATOR = new Parcelable.Creator<PictureItem>() {
-        @Override
-        public PictureItem createFromParcel(Parcel source) {
-            return new PictureItem(source);
-        }
-
-        @Override
-        public PictureItem[] newArray(int size) {
-            return new PictureItem[size];
-        }
-    };
 }

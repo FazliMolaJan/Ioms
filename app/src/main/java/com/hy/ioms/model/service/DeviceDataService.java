@@ -70,21 +70,25 @@ public class DeviceDataService implements DeviceDataInteraction {
                 });
     }
 
-
     /**
      * 获取计划任务图片
      *
-     * @param deviceId     设备id
      * @param page         第几页数据
      * @param itemsPerPage 每页个数
      * @param sort         排序
+     * @param companyId    公司Id
+     * @param circuitId    线路Id
+     * @param poleId       杆塔Id
+     * @param deviceId     设备id
+     * @param startTime    开始时间,为空则是全查
+     * @param endTime      结束时间,默认为当天
      */
     @Override
-    public Single<Page<PictureVO>> getScheduledTaskPictures(Long deviceId, int page, int itemsPerPage, String sort) {
+    public Single<Page<PictureVO>> getScheduledTaskPictures(int page, int itemsPerPage, String sort, Long companyId, Long circuitId, Long poleId, Long deviceId, String startTime, String endTime) {
         Page<PictureVO> scheduledTaskPictures = new Page<>();
         return deviceDataRepository
-                .getScheduledTaskPictures(deviceId, page, itemsPerPage, sort)
-                .doAfterSuccess(scheduledTaskPictures::synchronize)
+                .getScheduledTaskPictures(page, itemsPerPage, sort, companyId, circuitId, poleId, deviceId, startTime, endTime)
+                .doOnSuccess(scheduledTaskPictures::synchronize)
                 .map(Page::getContent)
                 .map(scheduleTaskPictureDTOs -> {
                     List<PictureVO> list = new ArrayList<>();
@@ -96,23 +100,27 @@ public class DeviceDataService implements DeviceDataInteraction {
                     scheduledTaskPictures.setContent(pictureVOs);
                     return scheduledTaskPictures;
                 });
-
     }
 
     /**
      * 获取手动拍照图片
      *
-     * @param deviceId     设备id
      * @param page         第几页数据
      * @param itemsPerPage 每页个数
      * @param sort         排序
+     * @param companyId    公司Id
+     * @param circuitId    线路Id
+     * @param poleId       杆塔Id
+     * @param deviceId     设备id
+     * @param startTime    开始时间,为空则是全查
+     * @param endTime      结束时间,默认为当天
      */
     @Override
-    public Single<Page<PictureVO>> getManualPictures(Long deviceId, int page, int itemsPerPage, String sort) {
+    public Single<Page<PictureVO>> getManualPictures(int page, int itemsPerPage, String sort, Long companyId, Long circuitId, Long poleId, Long deviceId, String startTime, String endTime) {
         Page<PictureVO> manualPicturesVOPage = new Page<>();
         return deviceDataRepository
-                .getManualPictures(deviceId, page, itemsPerPage, sort)
-                .doAfterSuccess(manualPicturesVOPage::synchronize)
+                .getManualPictures(page, itemsPerPage, sort, companyId, circuitId, poleId, deviceId, startTime, endTime)
+                .doOnSuccess(manualPicturesVOPage::synchronize)
                 .map(Page::getContent)
                 .map(manualPictureDTOs -> {
                     List<PictureVO> list = new ArrayList<>();

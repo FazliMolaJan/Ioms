@@ -17,7 +17,7 @@ import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.dto.VideoSenderTaskDTO;
 import com.hy.ioms.model.net.IomsApi;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,7 +25,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import retrofit2.Response;
 
@@ -35,18 +34,17 @@ import retrofit2.Response;
  * <p>
  * Created by wsw on 2017/8/9.
  */
-
+@SuppressWarnings("unused")
 public class DeviceDataRepository {
     private static final String TAG = "DeviceDataRepository";
     private IomsApi iomsApi;
+    private Gson gson;
 
     @Inject
-    public DeviceDataRepository(IomsApi iomsApi) {
+    public DeviceDataRepository(IomsApi iomsApi, Gson gson) {
         this.iomsApi = iomsApi;
+        this.gson = gson;
     }
-
-    @Inject
-    Gson gson;
 
     /**
      * 获取设备
@@ -59,7 +57,8 @@ public class DeviceDataRepository {
      * @param poleId       杆塔Id,默认为0
      */
     @NonNull
-    public Single<Page<DeviceDTO>> getDevices(int page, int itemsPerPage, String sort, Long companyId, Long circuitId, Long poleId) {
+    public Single<Page<DeviceDTO>> getDevices(int page, int itemsPerPage, String sort,
+                                              Long companyId, Long circuitId, Long poleId) {
         return iomsApi.getDevices(page, itemsPerPage, sort, companyId, circuitId, poleId)
                 .map(this::pageTransform)
                 .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
@@ -68,39 +67,53 @@ public class DeviceDataRepository {
     /**
      * 获取计划任务图片
      *
-     * @param deviceId 设备id
-     * @param page     第几页
-     * @param size     每页的个数
-     * @param sort     排序
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
      */
-    public Single<Page<ScheduleTaskPictureDTO>> getScheduledTaskPictures(Long deviceId, int page, int size, String sort) {
-        return iomsApi.getScheduleTaskPictures(deviceId, page, size, sort)
-                .map((Response<List<ScheduleTaskResultDTO>> listResponse) -> {
-                    Page<ScheduleTaskResultDTO> scheduleTaskPicturesPage = new Page<>();
-                    String totalCount = listResponse.headers().get(Config.TOTAL_COUNT);
-                    scheduleTaskPicturesPage.setContent(listResponse.body());
-                    scheduleTaskPicturesPage.setTotalNumber(Integer.parseInt(totalCount));
-                    scheduleTaskPicturesPage.setCurrentPage(page);
-                    return scheduleTaskPicturesPage;
-                })
-                .map(new Function<Page<ScheduleTaskResultDTO>, Page<ScheduleTaskPictureDTO>>() {
-                    @Override
-                    public Page<ScheduleTaskPictureDTO> apply(@NonNull Page<ScheduleTaskResultDTO> scheduleTaskResultDTOPage) throws Exception {
-                        return null;
+    public Single<Page<ScheduleTaskPictureDTO>> getScheduledTaskPictures(int page, int size, String sort,
+                                                                         Long companyId, Long circuitId,
+                                                                         Long poleId, Long deviceId,
+                                                                         String startTime, String endTime) {
+        return iomsApi.getScheduleTaskPictures(page, size, sort, companyId, circuitId, poleId, deviceId, startTime, endTime)
+                .map(this::pageTransform)
+                .map(scheduleTaskResultDTOPage -> {
+                    Page<ScheduleTaskPictureDTO> pictureDTOPage = new Page<>();
+                    pictureDTOPage.setTotalNumber(scheduleTaskResultDTOPage.getTotalNumber());
+                    pictureDTOPage.setCurrentPage(scheduleTaskResultDTOPage.getCurrentPage());
+                    List<ScheduleTaskPictureDTO> list = new ArrayList<>();
+                    for (ScheduleTaskResultDTO scheduleTaskResultDTO : scheduleTaskResultDTOPage.getContent()) {
+                        list.add(gson.fromJson(scheduleTaskResultDTO.getContent(), ScheduleTaskPictureDTO.class));
                     }
+                    pictureDTOPage.setContent(list);
+                    return pictureDTOPage;
                 });
     }
 
     /**
      * 获取手动拍照图片
      *
-     * @param deviceId 设备id
-     * @param page     第几页
-     * @param size     每页的个数
-     * @param sort     排序
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
      */
-    public Single<Page<ManualPictureDTO>> getManualPictures(Long deviceId, int page, int size, String sort) {
-        return iomsApi.getManualPictures(deviceId, page, size, sort)
+    public Single<Page<ManualPictureDTO>> getManualPictures(int page, int size, String sort,
+                                                            Long companyId, Long circuitId,
+                                                            Long poleId, Long deviceId,
+                                                            String startTime, String endTime) {
+        return iomsApi.getManualPictures(page, size, sort, companyId, circuitId, poleId, deviceId, startTime, endTime)
                 .map(this::pageTransform)
                 .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
     }
@@ -215,7 +228,6 @@ public class DeviceDataRepository {
      * @return Page<T>
      */
     private <T> Page<T> pageTransform(Response<List<T>> listResponse) {
-        Log.i(TAG, "pageTransform");
         Page<T> page = new Page<>();
         String totalCount = listResponse.headers().get(Config.TOTAL_COUNT);
         page.setContent(listResponse.body());

@@ -1,34 +1,22 @@
 package com.hy.ioms;
 
-import android.util.Pair;
-
+import com.google.gson.Gson;
+import com.hy.ioms.model.Page;
 import com.hy.ioms.model.dto.FilterDTO;
+import com.hy.ioms.model.dto.ScheduleTaskPictureDTO;
 import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.dto.VideoSenderTaskDTO;
 import com.hy.ioms.model.repository.DeviceDataRepository;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.reactivestreams.Publisher;
-import org.robolectric.RobolectricTestRunner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.observers.TestObserver;
 
 /**
@@ -41,7 +29,7 @@ public class DeviceDataRepositoryTest extends BaseTest {
     @Before
     public void setUp() {
         init();
-        deviceDataRepository = new DeviceDataRepository(iomsApi);
+        deviceDataRepository = new DeviceDataRepository(iomsApi, new Gson());
     }
 
     /**
@@ -68,12 +56,26 @@ public class DeviceDataRepositoryTest extends BaseTest {
 
         TestObserver testObserver = new TestObserver();
 
-        login().andThen(deviceDataRepository.getScheduledTaskPictures(Long.parseLong("1"), 0, 10, ""))
-                .subscribe(testObserver);
+        login().andThen(deviceDataRepository.getScheduledTaskPictures(0, 10, "", null,
+                null, null, null, "2017-02-22 00:00:00", "2017-02-23 00:00:00"))
+                .subscribe(new SingleObserver<Page<ScheduleTaskPictureDTO>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable disposable) {
 
-        testObserver.assertComplete();
+                    }
 
+                    @Override
+                    public void onSuccess(@NonNull Page<ScheduleTaskPictureDTO> scheduleTaskPictureDTOPage) {
+                        System.out.println(scheduleTaskPictureDTOPage.getTotalNumber());
+                    }
 
+                    @Override
+                    public void onError(@NonNull Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
+
+//        testObserver.assertComplete();
     }
 
     /**
@@ -86,7 +88,7 @@ public class DeviceDataRepositoryTest extends BaseTest {
 
         TestObserver testObserver = new TestObserver();
 
-        login().andThen(deviceDataRepository.getManualPictures(Long.parseLong("1"), 0, 10, ""))
+        login().andThen(deviceDataRepository.getManualPictures(0, 10, "", null, null, null, null, null, null))
                 .subscribe(testObserver);
 
         testObserver.assertComplete();

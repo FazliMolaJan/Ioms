@@ -7,7 +7,6 @@ package com.hy.ioms.model.dto;
 @SuppressWarnings("unused")
 public class ScheduleTaskResultDTO {
     private String content;
-    private Long deviceId;
     private Long id;
     private String modifiedDate;
     private String taskUuid;
@@ -18,14 +17,6 @@ public class ScheduleTaskResultDTO {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Long getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Long deviceId) {
-        this.deviceId = deviceId;
     }
 
     public Long getId() {
@@ -50,5 +41,15 @@ public class ScheduleTaskResultDTO {
 
     public void setTaskUuid(String taskUuid) {
         this.taskUuid = taskUuid;
+    }
+
+    @Override
+    public String toString() {
+        return "ScheduleTaskResultDTO{" +
+                "content='" + content + '\'' +
+                ", id=" + id +
+                ", modifiedDate='" + modifiedDate + '\'' +
+                ", taskUuid='" + taskUuid + '\'' +
+                '}';
     }
 }

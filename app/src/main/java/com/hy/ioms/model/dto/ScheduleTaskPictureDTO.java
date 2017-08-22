@@ -10,7 +10,7 @@ import java.util.List;
  * Created by wsw on 2017/4/18.
  */
 @SuppressWarnings("unused")
-public class ScheduleTaskPictureDTO implements Mapper<PictureVO>{
+public class ScheduleTaskPictureDTO implements Mapper<PictureVO> {
     /**
      * result : {"TaskInfo":{"Type":"PicCapture","PresetId":3,"Enable":true,"Period":"0123456","Height":600,"Time":"2034","Camera":"Emd.Device.Camera.E0","Id":"c91c6f6b75a7478e9f4257dae06b06c9","Width":800,"Name":"???E0_20:34"},"DataType":"FileList","Files":[{"Format":"Jpeg","Length":18362,"DateTime":"2017-04-17 20:35:42","URL":"http://www4.ioms.com.cn:9090/static/\\HY_OLMS_L_0000003\\TaskSchedule\\2017-4\\20170417-203542.jpeg","Name":"/Emd/data/PicCapture/Emd.Device.Camera.E0-20170417-203529-1.jpg"}]}
      * senderInfo : {"Signal":"TaskSchedule","SenderObject":"Emd.Service.TimerTask.E0","Interface":"Emd.Msg.Data"}
@@ -61,6 +61,7 @@ public class ScheduleTaskPictureDTO implements Mapper<PictureVO>{
         for (ResultBean.FilesBean filesBean : this.getResult().getFiles()) {
             pictureVO.setDate(filesBean.getDateTime());
             pictureVO.setUrl(filesBean.getURL());
+            pictureVO.setDeviceCode(header.getDeviceCode());
         }
         return pictureVO;
     }

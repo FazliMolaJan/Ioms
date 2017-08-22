@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="text"
+            type="String"/>
+    </data>
+
+    <TextView
+        android:id="@+id/item"
+        style="?android:attr/spinnerItemStyle"
+        android:background="@color/colorTransparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="120dp"
+        android:ellipsize="marquee"
+        android:maxLines="1"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:textAlignment="inherit"
+        android:textColor="@color/material_light_white"
+        app:text="@{text}"
+        tools:text="计划任务图片"/>
+</layout>
