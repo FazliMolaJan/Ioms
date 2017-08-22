@@ -3,23 +3,19 @@ package com.hy.ioms.view.picture;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.widget.ArrayAdapter;
 
 import com.hy.ioms.R;
 import com.hy.ioms.databinding.FragmentPictureListBinding;
 import com.hy.ioms.di.AppComponent;
 import com.hy.ioms.di.picture.DaggerPictureComponent;
 import com.hy.ioms.di.picture.PictureModule;
-import com.hy.ioms.model.vo.SpinItemVO;
 import com.hy.ioms.view.base.BaseFragment;
-import com.hy.ioms.view.device.DeviceFilterFragment;
-import com.hy.ioms.view.device.DeviceListFragment;
 import com.hy.ioms.view.filter.FilterBottomSheetFragment;
 import com.hy.ioms.view.ui.recycler.MultipleTypeAdapter;
 import com.hy.ioms.view.ui.spinner.SimpleSpinnerAdapter;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import vm.EventViewModel;
 import vm.PicturePageViewModel;
@@ -39,6 +35,7 @@ public class PictureFragment extends BaseFragment<FragmentPictureListBinding> {
     MultipleTypeAdapter multipleTypeAdapter;
 
     @Inject
+    @Named("picture")
     SimpleSpinnerAdapter simpleSpinnerAdapter;
 
     @Override
@@ -71,12 +68,12 @@ public class PictureFragment extends BaseFragment<FragmentPictureListBinding> {
     @Override
     protected void setViews() {
         b.spPictureType.setAdapter(simpleSpinnerAdapter);
-        b.deviceContent.fragmentPictureRv.setHasFixedSize(true);
-        b.deviceContent.fragmentPictureRv.setAdapter(multipleTypeAdapter);
-        b.deviceContent.fragmentPictureRv.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        b.pictureContent.fragmentPictureRv.setHasFixedSize(true);
+        b.pictureContent.fragmentPictureRv.setAdapter(multipleTypeAdapter);
+        b.pictureContent.fragmentPictureRv.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
-        b.deviceContent.fragmentPictureRefresh.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW);
-        b.deviceContent.fragmentPictureRefresh.setOnRefreshListener(() -> pictureViewModel.refresh());
+        b.pictureContent.fragmentPictureRefresh.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW);
+        b.pictureContent.fragmentPictureRefresh.setOnRefreshListener(() -> pictureViewModel.refresh());
     }
 
     @Override

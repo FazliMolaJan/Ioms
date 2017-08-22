@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/ic_filter_while_24dp"
+                    android:drawableStart="@drawable/ic_filter_while_24dp"
                     android:gravity="center"
                     android:onClick="@{event.onClick}"
                     android:paddingLeft="10dp"

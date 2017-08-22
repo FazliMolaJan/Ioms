@@ -1,8 +1,8 @@
 package com.hy.ioms.model.interaction;
 
 import com.hy.ioms.model.Page;
-import com.hy.ioms.model.PagingParams;
 import com.hy.ioms.model.dto.TreeNodeDTO;
+import com.hy.ioms.model.vo.AlarmVO;
 import com.hy.ioms.model.vo.DeviceStatusVO;
 import com.hy.ioms.model.vo.DeviceVO;
 import com.hy.ioms.model.vo.PictureVO;
@@ -37,7 +37,6 @@ public interface DeviceDataInteraction {
     /**
      * 获取计划任务图片
      *
-     *
      * @param page         第几页数据
      * @param itemsPerPage 每页个数
      * @param sort         排序
@@ -68,6 +67,43 @@ public interface DeviceDataInteraction {
     Single<Page<PictureVO>> getManualPictures(int page, int itemsPerPage, String sort, Long companyId,
                                               Long circuitId, Long poleId, Long deviceId,
                                               String startTime, String endTime);
+
+    /**
+     * 获取设备山火报警
+     *
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
+     */
+    Single<Page<AlarmVO>> getFireAlarm(int page, int size, String sort,
+                                       Long companyId, Long circuitId,
+                                       Long poleId, Long deviceId,
+                                       String startTime, String endTime);
+
+    /**
+     * 获取设备外破报警
+     *
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
+     */
+    Single<Page<AlarmVO>> getBreakAlarm(int page, int size, String sort,
+                                        Long companyId, Long circuitId,
+                                        Long poleId, Long deviceId,
+                                        String startTime, String endTime);
+
 
     /**
      * 获取在线设备code列表

@@ -1,8 +1,5 @@
 package com.hy.ioms.di.picture;
 
-import android.widget.ArrayAdapter;
-
-import com.hy.ioms.R;
 import com.hy.ioms.di.AppScope;
 import com.hy.ioms.model.PagingParams;
 import com.hy.ioms.model.dto.FilterDTO;
@@ -19,7 +16,6 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
-import vm.DevicePageDataViewModel;
 import vm.PicturePageViewModel;
 
 /**
@@ -59,6 +55,7 @@ public class PictureModule {
         return list;
     }
 
+    @Named("picture")
     @Provides
     @AppScope
     SimpleSpinnerAdapter provideArrayAdapter(List<SpinItemVO> pictureTypes, @Named("picture") IView iView) {

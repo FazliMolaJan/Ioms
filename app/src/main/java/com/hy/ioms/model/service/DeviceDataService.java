@@ -3,6 +3,7 @@ package com.hy.ioms.model.service;
 import com.hy.ioms.Config;
 import com.hy.ioms.model.Page;
 import com.hy.ioms.model.dto.AlarmBreakDTO;
+import com.hy.ioms.model.dto.AlarmFireDTO;
 import com.hy.ioms.model.dto.DeviceDTO;
 import com.hy.ioms.model.dto.DeviceStatusDTO;
 import com.hy.ioms.model.dto.ManualPictureDTO;
@@ -11,6 +12,7 @@ import com.hy.ioms.model.dto.TreeNodeDTO;
 import com.hy.ioms.model.dto.VideoSenderTaskDTO;
 import com.hy.ioms.model.interaction.DeviceDataInteraction;
 import com.hy.ioms.model.repository.DeviceDataRepository;
+import com.hy.ioms.model.vo.AlarmVO;
 import com.hy.ioms.model.vo.DeviceStatusVO;
 import com.hy.ioms.model.vo.DeviceVO;
 import com.hy.ioms.model.vo.PictureVO;
@@ -23,8 +25,6 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import io.reactivex.Single;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 
 /**
  * 设备数据服务
@@ -69,6 +69,9 @@ public class DeviceDataService implements DeviceDataInteraction {
                     return deviceVoPage;
                 });
     }
+
+
+    // FIXME: 2017/8/22  获取Page的函数基本一致.等待提取
 
     /**
      * 获取计划任务图片
@@ -135,6 +138,74 @@ public class DeviceDataService implements DeviceDataInteraction {
     }
 
     /**
+     * 获取设备山火报警
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
+     */
+    @Override
+    public Single<Page<AlarmVO>> getFireAlarm(int page, int size, String sort,
+                                              Long companyId, Long circuitId,
+                                              Long poleId, Long deviceId,
+                                              String startTime, String endTime) {
+        Page<AlarmVO> alarmVOPage = new Page<>();
+        return deviceDataRepository.getDeviceFireAlarm(page, size, sort, companyId, circuitId, poleId,
+                deviceId, startTime, endTime, Config.HANDLED)
+                .doOnSuccess(alarmVOPage::synchronize)
+                .map(Page::getContent)
+                .map(alarmFireDTOs -> {
+                    List<AlarmVO> list = new ArrayList<>();
+                    for (AlarmFireDTO alarmFireDTO : alarmFireDTOs) {
+                        list.add(alarmFireDTO.transform());
+                    }
+                    return list;
+                }).map(alarmVOs -> {
+                    alarmVOPage.setContent(alarmVOs);
+                    return alarmVOPage;
+                });
+    }
+
+    /**
+     * 获取外破报警
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
+     */
+    @Override
+    public Single<Page<AlarmVO>> getBreakAlarm(int page, int size, String sort,
+                                               Long companyId, Long circuitId,
+                                               Long poleId, Long deviceId,
+                                               String startTime, String endTime) {
+        Page<AlarmVO> alarmVOPage = new Page<>();
+        return deviceDataRepository.getDeviceBreakAlarm(page, size, sort, companyId, circuitId, poleId,
+                deviceId, startTime, endTime, Config.HANDLED)
+                .doOnSuccess(alarmVOPage::synchronize)
+                .map(Page::getContent)
+                .map(alarmBreakDTOs -> {
+                    List<AlarmVO> list = new ArrayList<>();
+                    for (AlarmBreakDTO alarmBreakDTO : alarmBreakDTOs) {
+                        list.add(alarmBreakDTO.transform());
+                    }
+                    return list;
+                }).map(alarmVOs -> {
+                    alarmVOPage.setContent(alarmVOs);
+                    return alarmVOPage;
+                });
+    }
+
+    /**
      * 获取在线设备
      */
     @Override
@@ -176,11 +247,11 @@ public class DeviceDataService implements DeviceDataInteraction {
         Single<Integer> countSingle;
         switch (projectType) {
             case Config.FIRE_PROJECT: //山火项目
-                countSingle = deviceDataRepository.getDeviceFireAlarm(id, Config.HANDLED, 0, 0, "")
+                countSingle = deviceDataRepository.getDeviceFireAlarmCount(id)
                         .map(Page::getTotalNumber);
                 break;
             case Config.BREAK_PROJECT://外破项目
-                countSingle = deviceDataRepository.getDeviceBreakAlarm(id, Config.HANDLED, 0, 0, "")
+                countSingle = deviceDataRepository.getDeviceBreakAlarmCount(id)
                         .map(Page::getTotalNumber);
                 break;
             default://其他默认为0个报警

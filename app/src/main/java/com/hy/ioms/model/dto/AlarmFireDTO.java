@@ -2,7 +2,7 @@ package com.hy.ioms.model.dto;
 
 
 import com.hy.ioms.model.Mapper;
-import com.hy.ioms.model.vo.AlarmFireVO;
+import com.hy.ioms.model.vo.AlarmVO;
 import com.hy.ioms.utils.DateUtils;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by wsw on 2017/6/27.
  */
 @SuppressWarnings("unused")
-public class AlarmFireDTO implements Mapper<AlarmFireVO> {
+public class AlarmFireDTO implements Mapper<AlarmVO> {
 
     /**
      * id : 938
@@ -268,8 +268,8 @@ public class AlarmFireDTO implements Mapper<AlarmFireVO> {
     }
 
     @Override
-    public AlarmFireVO transform() {
-        AlarmFireVO alarmFireVO = new AlarmFireVO();
+    public AlarmVO transform() {
+        AlarmVO alarmFireVO = new AlarmVO();
         alarmFireVO.setDeviceCode(this.deviceCode);
         alarmFireVO.setCollectionTime(DateUtils.getTime(this.collectionTime));
         alarmFireVO.setLatitude(this.latitude);
@@ -277,6 +277,10 @@ public class AlarmFireDTO implements Mapper<AlarmFireVO> {
         alarmFireVO.setLevel(this.level);
         alarmFireVO.setUrl(this.visiblePicPath);
         alarmFireVO.setDistance(this.distance);
+        alarmFireVO.setCompanyName(this.companyName);
+        alarmFireVO.setCircuitName(this.circuitCode);
+        alarmFireVO.setPoleName(this.poleCode);
+        alarmFireVO.setType(AlarmVO.FIRE);
         return alarmFireVO;
     }
 }

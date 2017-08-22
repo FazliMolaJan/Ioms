@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Response;
@@ -292,42 +291,46 @@ public interface IomsApi {
     /**
      * 根据设备得到山火告警对象
      *
+     * @param page      第几页数据
+     * @param size      每页个数
      * @param sort      排序
-     * @param page      第几页
-     * @param size      每页的个数
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
      * @param deviceId  设备id
-     * @param startTime 开始时间
-     * @param endTime   结束时间
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
      * @param deliver   用户只能看到推送了的
      */
     @GET("api/alarm-fires")
-    Single<Response<List<AlarmFireDTO>>> getDeviceFireAlarm(@Query("page") int page,
-                                                            @Query("size") int size,
-                                                            @Query("sort") String sort,
-                                                            @Query("deviceId") Long deviceId,
-                                                            @Query("startTime") String startTime,
-                                                            @Query("endTime") String endTime,
-                                                            @Query("deliver") int deliver);
+    Single<Response<List<AlarmFireDTO>>>
+    getDeviceFireAlarm(@Query("page") int page, @Query("size") int size, @Query("sort") String sort,
+                       @Query("companyId") Long companyId, @Query("circuitId") Long circuitId,
+                       @Query("poleId") Long poleId, @Query("deviceId") Long deviceId,
+                       @Query("startTime") String startTime, @Query("endTime") String endTime,
+                       @Query("deliver") int deliver);
 
     /**
      * 根据设备得到外破告警对象
      *
+     * @param page      第几页数据
+     * @param size      每页个数
      * @param sort      排序
-     * @param page      第几页
-     * @param size      每页的个数
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
      * @param deviceId  设备id
-     * @param startTime 开始时间
-     * @param endTime   结束时间
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
      * @param deliver   用户只能看到推送了的
      */
     @GET("api/alarm-breaks")
-    Single<Response<List<AlarmBreakDTO>>> getDeviceBreakAlarm(@Query("page") int page,
-                                                              @Query("size") int size,
-                                                              @Query("sort") String sort,
-                                                              @Query("deviceId") Long deviceId,
-                                                              @Query("startTime") String startTime,
-                                                              @Query("endTime") String endTime,
-                                                              @Query("deliver") int deliver);
+    Single<Response<List<AlarmBreakDTO>>>
+    getDeviceBreakAlarm(@Query("page") int page, @Query("size") int size, @Query("sort") String sort,
+                        @Query("companyId") Long companyId, @Query("circuitId") Long circuitId,
+                        @Query("poleId") Long poleId, @Query("deviceId") Long deviceId,
+                        @Query("startTime") String startTime, @Query("endTime") String endTime,
+                        @Query("deliver") int deliver);
 
     /**
      * 获取设备树

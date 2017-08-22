@@ -14,7 +14,7 @@
 
         <variable
             name="vm"
-            type="vm.PicturePageViewModel"/>
+            type="vm.AlarmPageViewModel"/>
 
     </data>
 
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:clickable="true"
-                    android:drawableLeft="@drawable/ic_filter_while_24dp"
+                    android:drawableStart="@drawable/ic_filter_while_24dp"
                     android:gravity="center"
                     android:onClick="@{event.onClick}"
                     android:paddingLeft="10dp"
@@ -63,8 +63,8 @@
         </android.support.design.widget.AppBarLayout>
 
         <include
-            android:id="@+id/device_content"
-            layout="@layout/content_picture_list"
+            android:id="@+id/alarm_content"
+            layout="@layout/content_alarm_list"
             bind:vm="@{vm}"/>
 
     </android.support.design.widget.CoordinatorLayout>

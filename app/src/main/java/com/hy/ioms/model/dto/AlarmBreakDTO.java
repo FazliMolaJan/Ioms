@@ -1,14 +1,14 @@
 package com.hy.ioms.model.dto;
 
 import com.hy.ioms.model.Mapper;
-import com.hy.ioms.model.vo.AlarmBreakVO;
+import com.hy.ioms.model.vo.AlarmVO;
 import com.hy.ioms.utils.DateUtils;
 
 /**
  * Created by wsw on 2017/7/13.
  */
 
-public class AlarmBreakDTO implements Mapper<AlarmBreakVO> {
+public class AlarmBreakDTO implements Mapper<AlarmVO> {
     private Long id;
     private String deviceCode;
     private String collectionTime;
@@ -192,13 +192,14 @@ public class AlarmBreakDTO implements Mapper<AlarmBreakVO> {
     }
 
     @Override
-    public AlarmBreakVO transform() {
-        AlarmBreakVO alarmBreakVO = new AlarmBreakVO();
+    public AlarmVO transform() {
+        AlarmVO alarmBreakVO = new AlarmVO();
         alarmBreakVO.setDeviceCode(this.deviceCode);
         alarmBreakVO.setCollectionTime(DateUtils.getTime(this.collectionTime));
         alarmBreakVO.setLevel(this.level);
         alarmBreakVO.setUrl(this.breakPicPath);
         alarmBreakVO.setDescription(this.remark);
+        alarmBreakVO.setType(AlarmVO.BREAK);
         return alarmBreakVO;
     }
 }

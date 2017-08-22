@@ -1,7 +1,6 @@
 package com.hy.ioms.model.repository;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.hy.ioms.Config;
@@ -25,7 +24,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Single;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
 import retrofit2.Response;
 
 
@@ -119,36 +117,69 @@ public class DeviceDataRepository {
     }
 
     /**
-     * 获取设备山火报警
+     * 获取设备山火报警个数
      *
-     * @param sort      排序
-     * @param page      第几页
-     * @param size      每页的个数
-     * @param deviceId  设备id
-     * @param startTime 开始时间
-     * @param endTime   结束时间
-     * @param deliver   用户只能看到推送了的
+     * @param deviceId 设备id
      */
-    public Single<Page<AlarmFireDTO>> getDeviceFireAlarm(Long deviceId, String startTime,
-                                                         String endTime, int deliver, int page,
-                                                         int size, String sort) {
-        return iomsApi.getDeviceFireAlarm(page, size, sort, deviceId, startTime, endTime, deliver)
+    public Single<Page<AlarmFireDTO>> getDeviceFireAlarmCount(Long deviceId) {
+        return iomsApi.getDeviceFireAlarm(0, 0, "", null, null, null, deviceId, null, null, Config.HANDLED)
                 .map(this::pageTransform)
-                .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
+                .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(0));
     }
 
     /**
      * 获取设备山火报警
      *
-     * @param sort     排序
-     * @param page     第几页
-     * @param size     每页的个数
-     * @param deviceId 设备id
-     * @param deliver  用户只能看到推送了的
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param startTime 开始时间,为空则是全查
+     * @param endTime   结束时间,默认为当天
+     * @param deliver   用户只能看到推送了的
      */
-    public Single<Page<AlarmFireDTO>> getDeviceFireAlarm(Long deviceId, int deliver, int page,
-                                                         int size, String sort) {
-        return iomsApi.getDeviceFireAlarm(page, size, sort, deviceId, null, null, deliver)
+    public Single<Page<AlarmFireDTO>> getDeviceFireAlarm(int page, int size, String sort,
+                                                         Long companyId, Long circuitId,
+                                                         Long poleId, Long deviceId,
+                                                         String startTime, String endTime,
+                                                         int deliver) {
+        return iomsApi.getDeviceFireAlarm(page, size, sort, companyId, circuitId, poleId, deviceId, startTime, endTime, deliver)
+                .map(this::pageTransform)
+                .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
+    }
+
+    /**
+     * 获取设备外破报警个数
+     *
+     * @param deviceId 设备id
+     */
+    public Single<Page<AlarmBreakDTO>> getDeviceBreakAlarmCount(Long deviceId) {
+        return iomsApi.getDeviceBreakAlarm(0, 0, "", null, null, null, deviceId, null, null, Config.HANDLED)
+                .map(this::pageTransform)
+                .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(0));
+    }
+
+    /**
+     * 获取设备外破报警
+     *
+     * @param page      第几页数据
+     * @param size      每页个数
+     * @param sort      排序
+     * @param companyId 公司Id
+     * @param circuitId 线路Id
+     * @param poleId    杆塔Id
+     * @param deviceId  设备id
+     * @param deliver   用户只能看到推送了的
+     */
+    public Single<Page<AlarmBreakDTO>> getDeviceBreakAlarm(int page, int size, String sort,
+                                                           Long companyId, Long circuitId,
+                                                           Long poleId, Long deviceId,
+                                                           String startTime, String endTime,
+                                                           int deliver) {
+        return iomsApi.getDeviceBreakAlarm(page, size, sort, companyId, circuitId, poleId, deviceId, startTime, endTime, deliver)
                 .map(this::pageTransform)
                 .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
     }
@@ -156,34 +187,18 @@ public class DeviceDataRepository {
     /**
      * 获取设备外破报警
      *
-     * @param sort      排序
-     * @param page      第几页
-     * @param size      每页的个数
-     * @param deviceId  设备id
-     * @param startTime 开始时间
-     * @param endTime   结束时间
-     * @param deliver   用户只能看到推送了的
-     */
-    public Single<Page<AlarmBreakDTO>> getDeviceBreakAlarm(Long deviceId, String startTime,
-                                                           String endTime, int deliver, int page,
-                                                           int size, String sort) {
-        return iomsApi.getDeviceBreakAlarm(page, size, sort, deviceId, startTime, endTime, deliver)
-                .map(this::pageTransform)
-                .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
-    }
-
-    /**
-     * 获取设备外破报警
-     *
      * @param sort     排序
      * @param page     第几页
      * @param size     每页的个数
      * @param deviceId 设备id
      * @param deliver  用户只能看到推送了的
      */
-    public Single<Page<AlarmBreakDTO>> getDeviceBreakAlarm(Long deviceId, int deliver, int page,
-                                                           int size, String sort) {
-        return iomsApi.getDeviceBreakAlarm(page, size, sort, deviceId, null, null, deliver)
+    public Single<Page<AlarmBreakDTO>> getDeviceBreakAlarm(int page, int size, String sort,
+                                                           Long companyId, Long circuitId,
+                                                           Long poleId, Long deviceId,
+                                                           int deliver) {
+        return iomsApi.getDeviceBreakAlarm(page, size, sort, companyId, circuitId, poleId,
+                deviceId, null, null, deliver)
                 .map(this::pageTransform)
                 .doOnSuccess(dtoPage -> dtoPage.setCurrentPage(page));
     }

@@ -8,6 +8,7 @@
         <variable
             name="item"
             type="com.hy.ioms.view.picture.PictureItem" />
+
         <variable
             name="onClickListener"
             type="android.view.View.OnClickListener"/>

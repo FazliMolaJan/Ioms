@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:name="com.hy.ioms.view.picture.PictureFragment"
+        tools:context="com.hy.ioms.view.picture.PictureFragment">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="vm.AlarmPageViewModel"/>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/fragment_picture_refresh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:onRefresh="@{vm}"
+            app:refreshing="@{vm.dataRefresh}"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/fragment_picture_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:scrollbarStyle="outsideOverlay"
+                app:footer_item="@{vm.footerItem}"
+                app:is_loading="@{vm.dataLoading}"
+                app:items="@{vm.datas}"
+                app:layoutManager="LinearLayoutManager"
+                app:recycler_scroll="@{vm}"
+                tools:ignore="PrivateResource"
+                tools:listitem="@layout/item_alarm"
+                tools:visibility="visible"
+                />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
