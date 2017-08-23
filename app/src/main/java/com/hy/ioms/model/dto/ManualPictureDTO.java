@@ -9,7 +9,7 @@ import com.hy.ioms.utils.DateUtils;
  * Created by wsw on 2017/4/10.
  */
 @SuppressWarnings("unused")
-public class ManualPictureDTO implements Mapper<PictureVO>{
+public class ManualPictureDTO implements Mapper<PictureVO> {
 
     /**
      * id : 2
@@ -81,6 +81,7 @@ public class ManualPictureDTO implements Mapper<PictureVO>{
         PictureVO pictureVO = new PictureVO();
         pictureVO.setDate(DateUtils.getTime(this.collectionTime));
         pictureVO.setUrl(this.url);
+        pictureVO.setDeviceCode(this.deviceCode);
         return pictureVO;
     }
 

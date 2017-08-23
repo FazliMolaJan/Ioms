@@ -59,6 +59,8 @@ public class Config {
     public static final String ARG_VIDEO_TASK_ID = "arg_video_task_id";
     public static final String ARG_ALARM_TITLE = "arg_alarm_title";
     public static final String ARG_FILTER_DTO = "arg_filter_dto";
+    public static final String ARG_ALARM_FRAGMENT_TYPE = "arg_alarm_fragment_type";
+    public static final String ARG_PICTURE_FRAGMENT_TYPE = "arg_picture_fragment_type";
     // res name end
 
     //device detail start
@@ -79,4 +81,6 @@ public class Config {
     public static final String BREAK_PROJECT = "外破";
 
     public static final int HANDLED = 1;
+
+
 }

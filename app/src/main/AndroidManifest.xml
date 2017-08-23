@@ -37,7 +37,8 @@
                 android:value="com.hy.ioms.view.main.MainActivity"/>
         </activity>
         <activity android:name=".view.video.VideoActivity">
-
+        </activity>
+        <activity android:name=".view.test.TestActivity">
         </activity>
     </application>
 

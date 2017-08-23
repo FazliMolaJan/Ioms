@@ -12,7 +12,7 @@ import dagger.Component;
  * Created by wsw on 2017/8/21.
  */
 @AppScope
-@Component(dependencies = AppComponent.class, modules = DeviceModule.class)
+@Component(dependencies = AppComponent.class, modules = DeviceDetailModule.class)
 public interface DeviceDetailComponent {
     void inject(DeviceDetailActivity deviceDetailActivity);
 }

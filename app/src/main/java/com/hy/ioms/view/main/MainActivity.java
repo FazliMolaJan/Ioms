@@ -18,6 +18,7 @@ import com.hy.ioms.view.ui.viewpager.FragmentAdapter;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import vm.MainViewModel;
 
@@ -28,12 +29,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public static final int ALARM = 2;
 
     private MenuItem menuItem;
-
     private long mExitTime;
 
     @Inject
     MainViewModel mainViewModel;
 
+    @Named("main")
     @Inject
     List<Fragment> fragmentList;
 

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2017/8/11.
  */
 @SuppressWarnings("unused")
-public class DeviceStatusDTO implements Mapper<DeviceStatusVO>{
+public class DeviceStatusDTO implements Mapper<DeviceStatusVO> {
 
     /**
      * Agent : {"Hy":[{"HeartBeatInterval":44,"Stat":"Error","Senders":null,"Enable":true,"Users":null,"Name":"Emd.Agent.Hy.E0"},{"HeartBeatInterval":44,"Stat":"Error","Senders":null,"Enable":true,"Users":null,"Name":"Emd.Agent.Hy.E1"}],"Sendu":[{"Stat":"Error","Senders":null,"Enable":true,"Users":null,"Name":"Emd.Agent.Sendu.E0"}],"NanWang":[{"Enable":false}]}
@@ -54,7 +54,6 @@ public class DeviceStatusDTO implements Mapper<DeviceStatusVO>{
     public void setService(ServiceBean Service) {
         this.Service = Service;
     }
-
 
 
     public static class AgentBean {
@@ -1335,7 +1334,6 @@ public class DeviceStatusDTO implements Mapper<DeviceStatusVO>{
                 public static class KernelBean {
                     /**
                      * Version : Linux version 2.6.35.3-670-g914558e+ (root@Linux-mint-32) (gcc version 4.4.4 (4.4.4_09.06.2010) ) #74 PREEMPT Wed Jun 21 16:16:57 CST 2017
-
                      */
 
                     private String Version;
@@ -1721,6 +1719,11 @@ public class DeviceStatusDTO implements Mapper<DeviceStatusVO>{
     // TODO: 2017/8/11 等待实现转换
     @Override
     public DeviceStatusVO transform() {
-        return null;
+        DeviceStatusVO deviceStatusVO = new DeviceStatusVO();
+        deviceStatusVO.setDevice(this.getDevice());
+        deviceStatusVO.setAgent(this.getAgent());
+        deviceStatusVO.setService(this.Service);
+        deviceStatusVO.setAccessServerTimeStamp(this.getAccessServerTimeStamp());
+        return deviceStatusVO;
     }
 }

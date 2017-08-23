@@ -12,6 +12,8 @@ import com.hy.ioms.view.picture.PictureFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -28,12 +30,14 @@ public class MainModule {
         this.mainActivity = mainActivity;
     }
 
+    @Named("main")
     @Provides
     @AppScope
     IView provideIView() {
         return mainActivity;
     }
 
+    @Named("main")
     @Provides
     @AppScope
     List<Fragment> provideFragmentList() {
